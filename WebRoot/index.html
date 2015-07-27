@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>index.html</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet" href="css/smartdoor.css">
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/jquery.mobile-1.4.5.min.js"></script>
+		<script src="js/smartdoor.js"></script>
+	</head>
+
+	<body>
+		<div class="coverPage"></div>
+		<div data-role="tabs" id="tabs">
+			<div data-role="navbar">
+				<ul>
+					<li>
+						<a href="#guest" data-ajax="false" class="ui-btn-active">游客</a>
+					</li>
+					<li>
+						<a href="#exhibition" data-ajax="false">展会主办方</a>
+					</li>
+					<li>
+						<a href="#stage" data-ajax="false">展台参展商</a>
+					</li>
+				</ul>
+			</div>
+			<div id="guest" class="ui-content">
+				<div style="width:100%;height:60px;">
+					<div id="guestSignUp" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all rightContainer signUp">注册<input type="button" data-enhanced="true" value="注册"></div>
+				</div>
+				<input type="tel" name="username" id="username" value="" placeholder="注册手机号" data-clear-btn="true">
+				<input type="password" name="password" id="password" value="" placeholder="密码" data-clear-btn="true">
+				<div style="width:100%;height:60px;">
+					<div class="leftContainer middle60px">
+						<a href="#">忘记密码</a>
+					</div>
+					<div id="guestSignIn" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all rightContainer signIn">登录<input type="button" data-enhanced="true" value="登录"></div>
+				</div>
+			</div>
+			<div id="exhibition" class="ui-content">
+				<div style="width:100%;height:60px;">
+					<div id="exhibitionSignUp" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all rightContainer signUp">注册<input type="button" data-enhanced="true" value="注册"></div>
+				</div>
+				<input type="tel" name="username" id="username" value="" placeholder="注册手机号" data-clear-btn="true">
+				<input type="password" name="password" id="password" value="" placeholder="密码" data-clear-btn="true">
+				<div style="width:100%;height:60px;">
+					<div class="leftContainer middle60px">
+						<a href="#">忘记密码</a>
+					</div>
+					<div id="exhibitionSignIn" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all rightContainer signIn">登录<input type="button" data-enhanced="true" value="登录"></div>
+				</div>
+			</div>
+			<div id="stage" class="ui-content">
+				<div style="width:100%;height:60px;">
+					<div id="stageSignUp" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all rightContainer signUp">注册<input type="button" data-enhanced="true" value="注册"></div>
+				</div>
+				<input type="tel" name="username" id="username" value="" placeholder="注册手机号" data-clear-btn="true">
+				<input type="password" name="password" id="password" value="" placeholder="密码" data-clear-btn="true">
+				<div style="width:100%;height:60px;">
+					<div class="leftContainer middle60px">
+						<a href="#">忘记密码</a>
+					</div>
+					<div id="stageSignIn" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all rightContainer signIn">登录<input type="button" data-enhanced="true" value="登录"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
