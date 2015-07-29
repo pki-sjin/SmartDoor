@@ -1,16 +1,6 @@
 $(function() {
-//	$("#tabs").find("a")[1].click();
-	$("#guestSignUp").click(function(e){
-		window.location = "login/guestsignup.html";
-	});
-	$("#exhibitionSignUp").click(function(e){
-		window.location = "login/exhibitionsignup.html";
-	});
-	$("#stageSignUp").click(function(e){
-		window.location = "login/stagesignup.html";
-	});
-	$("#guestSignIn").click(function(e){
-		window.location = "feature/user.html";
+	$(function(){
+		$( "[data-role='header']" ).toolbar();
 	});
 });
 
