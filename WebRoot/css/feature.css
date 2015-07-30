@@ -5,11 +5,17 @@
 
 .leftContainer {
 	float:left;
+	margin-right: 15px!important;
 }
 
 .middle60px {
 	line-height:60px;
 }
+
+.middle40px {
+	line-height:40px;
+}
+
 
 .coverPage {
 	position:absolute;
@@ -21,4 +27,24 @@
 	background-color:white;
 	opacity:0.5;
 	z-index:9999;
+}
+
+.exhibition-list thead th,
+.exhibition-list tbody tr:last-child {
+	border-bottom: 1px solid #d6d6d6; /* non-RGBA fallback */
+	border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.exhibition-list tbody th,
+.exhibition-list tbody td {
+	border-bottom: 1px solid #e6e6e6; /* non-RGBA fallback  */
+	border-bottom: 1px solid rgba(0,0,0,.05);
+}
+.exhibition-list tbody tr:last-child th,
+.exhibition-list tbody tr:last-child td {
+	border-bottom: 0;
+}
+.exhibition-list tbody tr:nth-child(odd) td,
+.exhibition-list tbody tr:nth-child(odd) th {
+	background-color: #eeeeee; /* non-RGBA fallback  */
+	background-color: rgba(0,0,0,.04);
 }

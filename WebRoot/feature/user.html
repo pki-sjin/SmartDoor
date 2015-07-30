@@ -1,8 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>index.html</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="../css/jquery.mobile-1.4.5.min.css">
 		<link rel="stylesheet" href="../css/feature.css">
 		<script src="../js/jquery-2.1.4.min.js"></script>
@@ -11,25 +12,180 @@
 	</head>
 
 	<body>
-		<div class="coverPage"></div>
 		<div data-role="page">
-		<div data-role="panel" id="userPanel" data-position="left" data-display="push" data-theme="a">
-    		<!-- panel content goes here -->
-    		<ul data-role="listview" data-inset="false">
-				<li data-icon="user"><a href="#">个人资料</a></li>
-				<li data-icon="info"><a href="#">展会信息</a></li>
-				<li data-icon="eye"><a href="#">我的活动</a></li>
-				<li data-icon="location"><a href="#">我的足迹</a></li>
-				<li data-icon="info"><a href="#">登出</a></li>
-			</ul>
-		</div><!-- /panel -->
-		
-		<div data-role="header" data-theme="a">
-			<a href="#userPanel" data-rel="bars" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-bars">Bars</a>
-			<h1>Welcome XXX</h1>
-		</div><!-- /header -->
-		
-		
+			<div data-role="panel" id="userPanel" data-position="left"
+				data-display="push" data-theme="a">
+				<!-- panel content goes here -->
+				<ul data-role="listview" data-inset="false">
+					<li data-icon="user">
+						<a href="#">个人资料</a>
+					</li>
+					<li data-icon="info">
+						<a href="#">展会信息</a>
+					</li>
+					<li data-icon="eye">
+						<a href="#">我的活动</a>
+					</li>
+					<li data-icon="location">
+						<a href="#">我的足迹</a>
+					</li>
+					<li data-icon="info">
+						<a href="#">登出</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /panel -->
+
+			<div data-role="header" data-theme="a">
+				<a href="#userPanel" data-rel="bars"
+					class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-bars">Bars</a>
+				<h1>
+					Welcome XXX
+				</h1>
+			</div>
+			<!-- /header -->
+
+			<div role="main" class="ui-content">
+				<div id="userInfo">
+					<label for="company">公司</label>
+					<input type="text" name="company" id="company" value="" placeholder="公司">
+					<label for="position">职位</label>
+					<input type="text" name="position" id="position" value="" placeholder="职位">
+					<label for="phone">电话</label>
+					<input type="tel" name="phone" id="phone" value="" placeholder="电话">
+					<label for="cell">手机</label>
+					<input type="tel" name="cell" id="cell" value="" placeholder="手机">
+					<label for="fax">传真</label>
+					<input type="tel" name="fax" id="fax" value="" placeholder="传真">
+					<label for="email">邮箱</label>
+					<input type="email" name="email" id="email" value="" placeholder="邮箱">
+					<div>
+						<label class="leftContainer middle40px">绑定微信</label>
+						<select class="siblingContainer" name="bindWechat" id="bindWechat" data-role="slider" data-mini="true">
+							<option value="off">No</option>
+							<option value="on" selected="">Yes</option>
+						</select>
+					</div>
+					<div id="edit" class="ui-input-btn ui-btn ui-corner-all">修改<input type="button" data-enhanced="true" value="修改"></div>
+				</div>
+				<div id="exhibitionInfo">
+					<table data-role="table" id="exhibition-table" data-mode="reflow"
+						class="exhibition-list ui-responsive">
+						<thead>
+							<tr>
+								<th data-priority="1">
+									No
+								</th>
+								<th data-priority="persist">
+									展会
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>
+									1
+								</th>
+								<td>
+									<a href="http://www.baidu.com">China Joy</a>
+								</td>
+							</tr>
+							<tr>
+								<th>
+									2
+								</th>
+								<td>
+									<a href="http://www.baidu.com">China Joy</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="myActivities">
+					<table data-role="table" id="activities-table" data-mode="reflow"
+						class="exhibition-list ui-responsive">
+						<thead>
+							<tr>
+								<th data-priority="1">
+									No
+								</th>
+								<th data-priority="persist">
+									展会
+								</th>
+								<th data-priority="3">
+									状态
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>
+									1
+								</th>
+								<td>
+									<a href="http://www.baidu.com">China Joy</a>
+								</td>
+								<td>
+									<a href="http://www.baidu.com">我要参加</a>
+								</td>
+							</tr>
+							<tr>
+								<th>
+									2
+								</th>
+								<td>
+									<a href="http://www.baidu.com">China Joy</a>
+								</td>
+								<td>
+									<a href="http://www.baidu.com">购买门票</a>
+								</td>
+							</tr>
+							<tr>
+								<th>
+									2
+								</th>
+								<td>
+									<a href="http://www.baidu.com">China Joy</a>
+								</td>
+								<td>
+									已支付
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="myTracks">
+					<table data-role="table" id="tracks-table" data-mode="reflow"
+						class="exhibition-list ui-responsive">
+						<thead>
+							<tr>
+								<th data-priority="1">
+									No
+								</th>
+								<th data-priority="persist">
+									展会
+								</th>
+								<th data-priority="3">
+									操作
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>
+									1
+								</th>
+								<td>
+									China Joy
+								</td>
+								<td>
+									<a href="http://www.baidu.com">查看足迹</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
