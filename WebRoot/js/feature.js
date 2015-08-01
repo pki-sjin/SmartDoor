@@ -1,6 +1,12 @@
 $(function() {
 	$(function(){
 		$( "[data-role='header']" ).toolbar();
+		$("#userPanel li a").click(function(e){
+			var id = $(this).attr("for");
+			$(".contentPanel").hide();
+			$("#"+id).show();
+			return $.killevent(e);
+		});
 	});
 });
 

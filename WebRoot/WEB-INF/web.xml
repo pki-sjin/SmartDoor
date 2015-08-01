@@ -17,10 +17,115 @@
   <filter-name>NoCacheFilter</filter-name>
   <url-pattern>/*</url-pattern>
  </filter-mapping>
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>org.zero.servlet.web.Login</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SendCode</servlet-name>
+    <servlet-class>org.zero.servlet.web.sms.SendCode</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Register</servlet-name>
+    <servlet-class>org.zero.servlet.web.Register</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetUser</servlet-name>
+    <servlet-class>org.zero.servlet.web.user.GetUser</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetExhibition</servlet-name>
+    <servlet-class>org.zero.servlet.web.exhibition.GetExhibition</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetActivities</servlet-name>
+    <servlet-class>org.zero.servlet.web.activity.GetActivities</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetTracks</servlet-name>
+    <servlet-class>org.zero.servlet.web.tracks.GetTracks</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>org.zero.servlet.web.Logout</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>EditUser</servlet-name>
+    <servlet-class>org.zero.servlet.web.user.EditUser</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RecordTrack</servlet-name>
+    <servlet-class>org.zero.servlet.web.tracks.RecordTrack</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Join</servlet-name>
+    <servlet-class>org.zero.servlet.web.activity.Join</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Buy</servlet-name>
+    <servlet-class>org.zero.servlet.web.activity.Buy</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SendCode</servlet-name>
+    <url-pattern>/SendCode</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Register</servlet-name>
+    <url-pattern>/Register</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetUser</servlet-name>
+    <url-pattern>/GetUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetExhibition</servlet-name>
+    <url-pattern>/GetExhibition</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetActivities</servlet-name>
+    <url-pattern>/GetActivities</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetTracks</servlet-name>
+    <url-pattern>/GetTracks</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EditUser</servlet-name>
+    <url-pattern>/EditUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RecordTrack</servlet-name>
+    <url-pattern>/RecordTrack</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Join</servlet-name>
+    <url-pattern>/Join</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Buy</servlet-name>
+    <url-pattern>/Buy</url-pattern>
+  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index.html</welcome-file>
  </welcome-file-list>
- <login-config>
-  <auth-method>BASIC</auth-method>
- </login-config>
 </web-app>

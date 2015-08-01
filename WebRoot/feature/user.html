@@ -18,18 +18,18 @@
 				<!-- panel content goes here -->
 				<ul data-role="listview" data-inset="false">
 					<li data-icon="user">
-						<a href="#">个人资料</a>
+						<a href="#" for="userInfo">个人资料</a>
 					</li>
 					<li data-icon="info">
-						<a href="#">展会信息</a>
+						<a href="#" for="exhibitionInfo">展会信息</a>
 					</li>
 					<li data-icon="eye">
-						<a href="#">我的活动</a>
+						<a href="#" for="myActivities">我的活动</a>
 					</li>
 					<li data-icon="location">
-						<a href="#">我的足迹</a>
+						<a href="#" for="myTracks">我的足迹</a>
 					</li>
-					<li data-icon="info">
+					<li data-icon="back">
 						<a href="#">登出</a>
 					</li>
 				</ul>
@@ -46,7 +46,7 @@
 			<!-- /header -->
 
 			<div role="main" class="ui-content">
-				<div id="userInfo">
+				<div id="userInfo" class="contentPanel">
 					<label for="company">公司</label>
 					<input type="text" name="company" id="company" value="" placeholder="公司">
 					<label for="position">职位</label>
@@ -68,7 +68,7 @@
 					</div>
 					<div id="edit" class="ui-input-btn ui-btn ui-corner-all">修改<input type="button" data-enhanced="true" value="修改"></div>
 				</div>
-				<div id="exhibitionInfo">
+				<div id="exhibitionInfo" class="contentPanel">
 					<table data-role="table" id="exhibition-table" data-mode="reflow"
 						class="exhibition-list ui-responsive">
 						<thead>
@@ -101,7 +101,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div id="myActivities">
+				<div id="myActivities" class="contentPanel">
 					<table data-role="table" id="activities-table" data-mode="reflow"
 						class="exhibition-list ui-responsive">
 						<thead>
@@ -154,7 +154,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div id="myTracks">
+				<div id="myTracks" class="contentPanel">
 					<table data-role="table" id="tracks-table" data-mode="reflow"
 						class="exhibition-list ui-responsive">
 						<thead>

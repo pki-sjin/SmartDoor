@@ -48,3 +48,7 @@
 	background-color: #eeeeee; /* non-RGBA fallback  */
 	background-color: rgba(0,0,0,.04);
 }
+
+.contentPanel {
+	display:none;	
+}

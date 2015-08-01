@@ -34,7 +34,6 @@ public class AuthFilter implements Filter {
 
 	private boolean authorize(HttpServletRequest request) {
 		Object o = request.getSession().getAttribute("USER");
-		return true;
-//		return o != null;
+		return o != null;
 	}
 }

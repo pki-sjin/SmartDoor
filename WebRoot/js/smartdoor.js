@@ -10,7 +10,31 @@ $(function() {
 		window.location = "login/stagesignup.html";
 	});
 	$("#guestSignIn").click(function(e){
-		window.location = "feature/user.html";
+		$("#guestSignIn").click(function(e){
+			var username = $("#username").val();
+			var password = $("#password").val();
+			if (username == "") {
+				
+				return;
+			}
+			
+			if (password == "") {
+				
+				return;
+			}
+			
+			$.ajax({ 
+				url: "Login",
+				type: "POST",
+				data: "&username=" + username +  "&password=" + password,
+				success: function(resp){
+		        	console.log(resp);
+		      	},
+		      	error: function(resp) {
+		      		console.log(resp);
+		      	}
+			});
+		});
 	});
 });
 
