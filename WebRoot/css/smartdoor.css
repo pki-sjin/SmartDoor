@@ -29,3 +29,10 @@
 	opacity:0.5;
 	z-index:9999;
 }
+
+#errorMessage {
+	padding: 15px;
+	background-color: #F4F502;
+	font-weight: bold;
+	font-size: 15px;
+}

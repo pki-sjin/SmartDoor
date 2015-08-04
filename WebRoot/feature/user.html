@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>index.html</title>
+		<title></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="../css/jquery.mobile-1.4.5.min.css">
@@ -13,6 +13,9 @@
 
 	<body>
 		<div data-role="page">
+			<div class="coverPage"></div>
+			<div data-role="popup" id="errorMessage">
+			</div>
 			<div data-role="panel" id="userPanel" data-position="left"
 				data-display="push" data-theme="a">
 				<!-- panel content goes here -->
@@ -30,7 +33,7 @@
 						<a href="#" for="myTracks">我的足迹</a>
 					</li>
 					<li data-icon="back">
-						<a href="#">登出</a>
+						<a href="../Logout" data-ajax="false">登出</a>
 					</li>
 				</ul>
 			</div>
@@ -40,13 +43,15 @@
 				<a href="#userPanel" data-rel="bars"
 					class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-bars">Bars</a>
 				<h1>
-					Welcome XXX
+					欢迎 <span id="displayHeader"></span>
 				</h1>
 			</div>
 			<!-- /header -->
 
 			<div role="main" class="ui-content">
 				<div id="userInfo" class="contentPanel">
+					<label for="display">姓名</label>
+					<input type="text" name="display" id="display" value="" placeholder="姓名">
 					<label for="company">公司</label>
 					<input type="text" name="company" id="company" value="" placeholder="公司">
 					<label for="position">职位</label>
