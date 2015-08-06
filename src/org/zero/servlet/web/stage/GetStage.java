@@ -1,9 +1,7 @@
-package org.zero.servlet.web.exhibition;
+package org.zero.servlet.web.stage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,15 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.zero.db.entity.exhibition.SdExhibition;
-import org.zero.db.entity.exhibition.SdExhibitionDAO;
+import org.zero.db.entity.relation.SdExStageRelation;
+import org.zero.db.entity.relation.SdExStageRelationDAO;
+import org.zero.db.entity.stage.SdStage;
+import org.zero.db.entity.stage.SdStageDAO;
 
-public class GetExhibition extends HttpServlet {
+public class GetStage extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public GetExhibition() {
+	public GetStage() {
 		super();
 	}
 
@@ -30,19 +30,19 @@ public class GetExhibition extends HttpServlet {
 
 		response.setContentType("text/json");
 		PrintWriter out = response.getWriter();
+		String ex_id = request.getParameter("ex_id");
 		JSONObject json = new JSONObject();
-		
-		SdExhibitionDAO dao = new SdExhibitionDAO();
-		List<SdExhibition> list = dao.findAll();
 		JSONArray array = new JSONArray();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-		for (SdExhibition ex : list) {
+		SdExStageRelationDAO relationDao = new SdExStageRelationDAO();
+		SdStageDAO stageDao = new SdStageDAO();
+		List<SdExStageRelation> list = relationDao.findBySdExId(Integer
+				.parseInt(ex_id));
+		for (SdExStageRelation relation : list) {
 			JSONObject json_ex = new JSONObject();
-			json_ex.put("id",ex.getSdExId());
-			json_ex.put("subject",ex.getSdExSubject());
-			json_ex.put("url",ex.getSdExHtml());
-			json_ex.put("start",sdf.format(new Date(ex.getSdExStart().getTime())));
-			json_ex.put("end",sdf.format(new Date(ex.getSdExEnd().getTime())));
+			SdStage stage = stageDao.findById(relation.getSdStageId());
+			json_ex.put("id", stage.getSdStageId());
+			json_ex.put("subject", stage.getSdStageSubject());
+			json_ex.put("url", stage.getSdStageHtml());
 			array.put(json_ex);
 		}
 		json.put("list", array);
@@ -50,5 +50,4 @@ public class GetExhibition extends HttpServlet {
 		out.flush();
 		out.close();
 	}
-
 }

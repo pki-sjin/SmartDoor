@@ -1,5 +1,5 @@
 #MyEclipse Hibernate Properties
-#Sun Aug 02 15:38:11 CST 2015
+#Thu Aug 06 20:31:00 CST 2015
 sessionFactoryName=org.zero.db.session.HibernateSessionFactory
 genBasicCompId=false
 profile=
@@ -22,4 +22,4 @@ reSettingsFile=
 configFile=/SmartDoor/src/org/zero/db/hibernate.cfg.xml
 createConfigFile=true
 addLibs2Classpath=true
-baseDaoClass=BaseHibernateDAO
+baseDaoClass=org.zero.db.entity.user.BaseHibernateDAO

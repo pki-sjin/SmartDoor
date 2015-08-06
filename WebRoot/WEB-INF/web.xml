@@ -65,6 +65,11 @@
     <servlet-name>Buy</servlet-name>
     <servlet-class>org.zero.servlet.web.activity.Buy</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>GetStage</servlet-name>
+    <servlet-class>org.zero.servlet.web.stage.GetStage</servlet-class>
+  </servlet>
+
 
 
 
@@ -124,6 +129,10 @@
   <servlet-mapping>
     <servlet-name>Buy</servlet-name>
     <url-pattern>/Buy</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetStage</servlet-name>
+    <url-pattern>/GetStage</url-pattern>
   </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index.html</welcome-file>
