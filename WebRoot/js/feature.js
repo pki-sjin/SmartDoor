@@ -38,17 +38,18 @@ $(function(){
 				type: "POST",
 				data: postStr,
 				success: function(resp){
-					hideLoading()
+					hideLoading();
 					console.log(resp);
 					showErrorMessage(resp.data);
 					if (resp.status == 1) {
 						$("#displayHeader").text(display);
+						showErrorMessage(resp.data);
 					} else if (resp.status == -1){
 						window.location = "../index.html";
 					}
 		      	},
 		      	error: function(resp) {
-		      		hideLoading()
+		      		hideLoading();
 		      		console.log(resp);
 		      	}
 			});

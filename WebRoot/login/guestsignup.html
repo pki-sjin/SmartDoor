@@ -13,6 +13,8 @@
 
 	<body>
 		<div class="coverPage"></div>
+		<div data-role="popup" id="errorMessage">
+		</div>
 		<div data-role="header" data-theme="a">
 			<a href="javascript:history.go(-1);" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 			<h1>游客注册</h1>
@@ -26,6 +28,7 @@
 			</div>
 			<div id="sendCode" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all siblingContainer">发送认证码<input type="button" data-enhanced="true" value="发送认证码"></div>
 		</div>
+		<span id="codeTag"></span>
 		<div id="register" class="ui-input-btn ui-btn ui-corner-all">注册<input type="button" data-enhanced="true" value="注册"></div>
 	</body>
 </html>
