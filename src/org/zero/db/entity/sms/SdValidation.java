@@ -14,11 +14,17 @@ public class SdValidation extends AbstractSdValidation implements
 	public SdValidation() {
 	}
 
+	/** minimal constructor */
+	public SdValidation(String cell, String code, String tag, String event,
+			Timestamp createTime, Integer sysrecord, Integer valid) {
+		super(cell, code, tag, event, createTime, sysrecord, valid);
+	}
+
 	/** full constructor */
-	public SdValidation(String sdValidationCell, String sdValidationCode,
-			String sdValidationTag, Timestamp sdValidationCreate) {
-		super(sdValidationCell, sdValidationCode, sdValidationTag,
-				sdValidationCreate);
+	public SdValidation(String cell, String code, String tag, String event,
+			Timestamp createTime, Integer sysrecord, Integer valid,
+			String remark) {
+		super(cell, code, tag, event, createTime, sysrecord, valid, remark);
 	}
 
 }

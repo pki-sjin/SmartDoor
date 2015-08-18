@@ -11,9 +11,16 @@ public class SdStage extends AbstractSdStage implements java.io.Serializable {
 	public SdStage() {
 	}
 
+	/** minimal constructor */
+	public SdStage(String code, Integer exId, String subject, String html,
+			Integer sysrecord, Integer valid) {
+		super(code, exId, subject, html, sysrecord, valid);
+	}
+
 	/** full constructor */
-	public SdStage(String sdStageSubject, String sdStageHtml) {
-		super(sdStageSubject, sdStageHtml);
+	public SdStage(String code, Integer exId, String subject, String html,
+			Integer sysrecord, Integer valid, String remark) {
+		super(code, exId, subject, html, sysrecord, valid, remark);
 	}
 
 }

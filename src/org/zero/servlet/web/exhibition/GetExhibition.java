@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,11 +17,20 @@ import org.zero.db.entity.exhibition.SdExhibitionDAO;
 
 public class GetExhibition extends HttpServlet {
 
+	private int ex_id;
+
 	/**
 	 * Constructor of the object.
 	 */
 	public GetExhibition() {
 		super();
+	}
+
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		ex_id = Integer.parseInt(getServletContext().getInitParameter(
+				"ActivedExhibitionId"));
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -33,22 +41,21 @@ public class GetExhibition extends HttpServlet {
 		JSONObject json = new JSONObject();
 		
 		SdExhibitionDAO dao = new SdExhibitionDAO();
-		List<SdExhibition> list = dao.findAll();
+		SdExhibition ex = dao.findById(ex_id);
 		JSONArray array = new JSONArray();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-		for (SdExhibition ex : list) {
-			JSONObject json_ex = new JSONObject();
-			json_ex.put("id",ex.getSdExId());
-			json_ex.put("subject",ex.getSdExSubject());
-			json_ex.put("url",ex.getSdExHtml());
-			json_ex.put("start",sdf.format(new Date(ex.getSdExStart().getTime())));
-			json_ex.put("end",sdf.format(new Date(ex.getSdExEnd().getTime())));
-			array.put(json_ex);
-		}
+
+		JSONObject json_ex = new JSONObject();
+		json_ex.put("id",ex.getId());
+		json_ex.put("subject",ex.getSubject());
+		json_ex.put("url",ex.getHtml());
+		json_ex.put("start",sdf.format(new Date(ex.getStart().getTime())));
+		json_ex.put("end",sdf.format(new Date(ex.getEnd().getTime())));
+		array.put(json_ex);
+	
 		json.put("list", array);
 		out.print(json);
 		out.flush();
 		out.close();
 	}
-
 }

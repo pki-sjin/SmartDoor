@@ -16,11 +16,20 @@ import org.zero.tool.Util;
 
 public class Login extends HttpServlet {
 
+	private int ex_id;
+
 	/**
 	 * Constructor of the object.
 	 */
 	public Login() {
 		super();
+	}
+
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		ex_id = Integer.parseInt(getServletContext().getInitParameter(
+				"ActivedExhibitionId"));
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -33,11 +42,10 @@ public class Login extends HttpServlet {
 
 		JSONObject json = new JSONObject();
 		SdUserDAO dao = new SdUserDAO();
-		List<SdUser> users = dao.findBySdUserName(username);
+		List<SdUser> users = dao.findByCode(username + "@" + ex_id);
 		if (users.size() > 0) {
 			SdUser user = users.get(0);
-			if (user.getSdUserPassword().equalsIgnoreCase(
-					Util.encrypt(password))) {
+			if (user.getPassword().equalsIgnoreCase(Util.encrypt(password))) {
 				request.getSession().setAttribute("USER", user);
 				json.put("status", 1);
 				json.put("data", "success");

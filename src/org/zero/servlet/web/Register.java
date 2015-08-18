@@ -3,6 +3,7 @@ package org.zero.servlet.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,11 +20,20 @@ import org.zero.tool.Util;
 
 public class Register extends HttpServlet {
 
+	private int ex_id;
+
 	/**
 	 * Constructor of the object.
 	 */
 	public Register() {
 		super();
+	}
+
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		ex_id = Integer.parseInt(getServletContext().getInitParameter(
+				"ActivedExhibitionId"));
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -34,24 +44,36 @@ public class Register extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String sendCode = request.getParameter("code");
-		String sms_id = request.getParameter("sms_id");
-
+		int sms_id = Integer.parseInt(request.getParameter("sms_id"));
 		JSONObject json = new JSONObject();
 
 		SdValidationDAO validationDao = new SdValidationDAO();
 		SdUserDAO userDao = new SdUserDAO();
-		SdValidation validation = validationDao.findById(Integer
-				.parseInt(sms_id));
-		Timestamp create = validation.getSdValidationCreate();
+		SdValidation validation = null;
+		if (sms_id != 0) {
+			validation = validationDao.findById(sms_id);
+		} else {
+			List<SdValidation> list = validationDao.findByCode(sendCode);
+			for (SdValidation v : list) {
+				if (v.getCell().equalsIgnoreCase(username)) {
+					validation = v;
+					break;
+				}
+			}
+		}
+
+		Timestamp create = validation.getCreateTime();
 		Timestamp now = new Timestamp(
 				System.currentTimeMillis() - 30 * 60 * 1000);
-		if (sendCode.equalsIgnoreCase(validation.getSdValidationCode())
-				&& username.equalsIgnoreCase(validation.getSdValidationCell())
+		if (validation != null
+				&& validation.getCode().equalsIgnoreCase(sendCode)
+				&& validation.getCell().equalsIgnoreCase(username)
 				&& now.compareTo(create) < 0) {
 			// validation ok
-			SdUser user = new SdUser(username, Util.encrypt(password), "", 0,
-					new Timestamp(System.currentTimeMillis()), new Timestamp(
-							System.currentTimeMillis()));
+			SdUser user = new SdUser(username + "@" + ex_id, ex_id, username,
+					Util.encrypt(password), 1, new Timestamp(System
+							.currentTimeMillis()), new Timestamp(System
+							.currentTimeMillis()), 0, 1);
 			Transaction transaction = userDao.getSession().beginTransaction();
 			userDao.save(user);
 			transaction.commit();

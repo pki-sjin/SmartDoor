@@ -25,9 +25,13 @@ public class SdValidationDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory
 			.getLogger(SdValidationDAO.class);
 	// property constants
-	public static final String SD_VALIDATION_CELL = "sdValidationCell";
-	public static final String SD_VALIDATION_CODE = "sdValidationCode";
-	public static final String SD_VALIDATION_TAG = "sdValidationTag";
+	public static final String CELL = "cell";
+	public static final String CODE = "code";
+	public static final String TAG = "tag";
+	public static final String EVENT = "event";
+	public static final String SYSRECORD = "sysrecord";
+	public static final String VALID = "valid";
+	public static final String REMARK = "remark";
 
 	public void save(SdValidation transientInstance) {
 		log.debug("saving SdValidation instance");
@@ -93,16 +97,32 @@ public class SdValidationDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findBySdValidationCell(Object sdValidationCell) {
-		return findByProperty(SD_VALIDATION_CELL, sdValidationCell);
+	public List findByCell(Object cell) {
+		return findByProperty(CELL, cell);
 	}
 
-	public List findBySdValidationCode(Object sdValidationCode) {
-		return findByProperty(SD_VALIDATION_CODE, sdValidationCode);
+	public List findByCode(Object code) {
+		return findByProperty(CODE, code);
 	}
 
-	public List findBySdValidationTag(Object sdValidationTag) {
-		return findByProperty(SD_VALIDATION_TAG, sdValidationTag);
+	public List findByTag(Object tag) {
+		return findByProperty(TAG, tag);
+	}
+
+	public List findByEvent(Object event) {
+		return findByProperty(EVENT, event);
+	}
+
+	public List findBySysrecord(Object sysrecord) {
+		return findByProperty(SYSRECORD, sysrecord);
+	}
+
+	public List findByValid(Object valid) {
+		return findByProperty(VALID, valid);
+	}
+
+	public List findByRemark(Object remark) {
+		return findByProperty(REMARK, remark);
 	}
 
 	public List findAll() {

@@ -1,4 +1,4 @@
-package org.zero.db.entity.stage;
+package org.zero.db.entity.join;
 
 import java.util.List;
 import org.hibernate.LockMode;
@@ -10,29 +10,27 @@ import org.zero.db.entity.user.BaseHibernateDAO;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * SdStage entities. Transaction control of the save(), update() and delete()
+ * SdJoin entities. Transaction control of the save(), update() and delete()
  * operations can directly support Spring container-managed transactions or they
  * can be augmented to handle user-managed Spring transactions. Each of these
  * methods provides additional information for how to configure it for the
  * desired type of transaction control.
  * 
- * @see org.zero.db.entity.stage.SdStage
+ * @see org.zero.db.entity.join.SdJoin
  * @author MyEclipse Persistence Tools
  */
 
-public class SdStageDAO extends BaseHibernateDAO {
-	private static final Logger log = LoggerFactory.getLogger(SdStageDAO.class);
+public class SdJoinDAO extends BaseHibernateDAO {
+	private static final Logger log = LoggerFactory.getLogger(SdJoinDAO.class);
 	// property constants
 	public static final String CODE = "code";
-	public static final String EX_ID = "exId";
-	public static final String SUBJECT = "subject";
-	public static final String HTML = "html";
+	public static final String DESCRIPTION = "description";
 	public static final String SYSRECORD = "sysrecord";
 	public static final String VALID = "valid";
 	public static final String REMARK = "remark";
 
-	public void save(SdStage transientInstance) {
-		log.debug("saving SdStage instance");
+	public void save(SdJoin transientInstance) {
+		log.debug("saving SdJoin instance");
 		try {
 			getSession().save(transientInstance);
 			log.debug("save successful");
@@ -42,8 +40,8 @@ public class SdStageDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void delete(SdStage persistentInstance) {
-		log.debug("deleting SdStage instance");
+	public void delete(SdJoin persistentInstance) {
+		log.debug("deleting SdJoin instance");
 		try {
 			getSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -53,11 +51,11 @@ public class SdStageDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public SdStage findById(java.lang.Integer id) {
-		log.debug("getting SdStage instance with id: " + id);
+	public SdJoin findById(java.lang.Integer id) {
+		log.debug("getting SdJoin instance with id: " + id);
 		try {
-			SdStage instance = (SdStage) getSession().get(
-					"org.zero.db.entity.stage.SdStage", id);
+			SdJoin instance = (SdJoin) getSession().get(
+					"org.zero.db.entity.join.SdJoin", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -65,11 +63,11 @@ public class SdStageDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findByExample(SdStage instance) {
-		log.debug("finding SdStage instance by example");
+	public List findByExample(SdJoin instance) {
+		log.debug("finding SdJoin instance by example");
 		try {
 			List results = getSession().createCriteria(
-					"org.zero.db.entity.stage.SdStage").add(
+					"org.zero.db.entity.join.SdJoin").add(
 					Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -81,10 +79,10 @@ public class SdStageDAO extends BaseHibernateDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding SdStage instance with property: " + propertyName
+		log.debug("finding SdJoin instance with property: " + propertyName
 				+ ", value: " + value);
 		try {
-			String queryString = "from SdStage as model where model."
+			String queryString = "from SdJoin as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -99,16 +97,8 @@ public class SdStageDAO extends BaseHibernateDAO {
 		return findByProperty(CODE, code);
 	}
 
-	public List findByExId(Object exId) {
-		return findByProperty(EX_ID, exId);
-	}
-
-	public List findBySubject(Object subject) {
-		return findByProperty(SUBJECT, subject);
-	}
-
-	public List findByHtml(Object html) {
-		return findByProperty(HTML, html);
+	public List findByDescription(Object description) {
+		return findByProperty(DESCRIPTION, description);
 	}
 
 	public List findBySysrecord(Object sysrecord) {
@@ -124,9 +114,9 @@ public class SdStageDAO extends BaseHibernateDAO {
 	}
 
 	public List findAll() {
-		log.debug("finding all SdStage instances");
+		log.debug("finding all SdJoin instances");
 		try {
-			String queryString = "from SdStage";
+			String queryString = "from SdJoin";
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -135,10 +125,10 @@ public class SdStageDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public SdStage merge(SdStage detachedInstance) {
-		log.debug("merging SdStage instance");
+	public SdJoin merge(SdJoin detachedInstance) {
+		log.debug("merging SdJoin instance");
 		try {
-			SdStage result = (SdStage) getSession().merge(detachedInstance);
+			SdJoin result = (SdJoin) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -147,8 +137,8 @@ public class SdStageDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(SdStage instance) {
-		log.debug("attaching dirty SdStage instance");
+	public void attachDirty(SdJoin instance) {
+		log.debug("attaching dirty SdJoin instance");
 		try {
 			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -158,8 +148,8 @@ public class SdStageDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachClean(SdStage instance) {
-		log.debug("attaching clean SdStage instance");
+	public void attachClean(SdJoin instance) {
+		log.debug("attaching clean SdJoin instance");
 		try {
 			getSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");

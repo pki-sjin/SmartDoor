@@ -11,19 +11,30 @@ public abstract class AbstractSdUser implements java.io.Serializable {
 
 	// Fields
 
-	private Integer sdUserId;
-	private String sdUserName;
-	private String sdUserPassword;
-	private String sdUserDisplayname;
-	private String sdUserCompany;
-	private String sdUserPosition;
-	private String sdUserTel;
-	private String sdUserCell;
-	private String sdUserFax;
-	private String sdUserMail;
-	private Integer sdUserTypeId;
-	private Timestamp sdUserCreate;
-	private Timestamp sdUserLastlogin;
+	private Integer id;
+	private String code;
+	private Integer exId;
+	private String name;
+	private String password;
+	private String displayname;
+	private String country;
+	private String province;
+	private String city;
+	private String company;
+	private String address;
+	private String postcode;
+	private String web;
+	private String position;
+	private String tel;
+	private String cell;
+	private String fax;
+	private String mail;
+	private Integer typeId;
+	private Timestamp createTime;
+	private Timestamp lastlogin;
+	private Integer sysrecord;
+	private Integer valid;
+	private String remark;
 
 	// Constructors
 
@@ -32,141 +43,245 @@ public abstract class AbstractSdUser implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public AbstractSdUser(String sdUserName, String sdUserPassword,
-			String sdUserDisplayname, Integer sdUserTypeId,
-			Timestamp sdUserCreate, Timestamp sdUserLastlogin) {
-		this.sdUserName = sdUserName;
-		this.sdUserPassword = sdUserPassword;
-		this.sdUserDisplayname = sdUserDisplayname;
-		this.sdUserTypeId = sdUserTypeId;
-		this.sdUserCreate = sdUserCreate;
-		this.sdUserLastlogin = sdUserLastlogin;
+	public AbstractSdUser(String code, Integer exId, String name,
+			String password, Integer typeId, Timestamp createTime,
+			Timestamp lastlogin, Integer sysrecord, Integer valid) {
+		this.code = code;
+		this.exId = exId;
+		this.name = name;
+		this.password = password;
+		this.typeId = typeId;
+		this.createTime = createTime;
+		this.lastlogin = lastlogin;
+		this.sysrecord = sysrecord;
+		this.valid = valid;
 	}
 
 	/** full constructor */
-	public AbstractSdUser(String sdUserName, String sdUserPassword,
-			String sdUserDisplayname, String sdUserCompany,
-			String sdUserPosition, String sdUserTel, String sdUserCell,
-			String sdUserFax, String sdUserMail, Integer sdUserTypeId,
-			Timestamp sdUserCreate, Timestamp sdUserLastlogin) {
-		this.sdUserName = sdUserName;
-		this.sdUserPassword = sdUserPassword;
-		this.sdUserDisplayname = sdUserDisplayname;
-		this.sdUserCompany = sdUserCompany;
-		this.sdUserPosition = sdUserPosition;
-		this.sdUserTel = sdUserTel;
-		this.sdUserCell = sdUserCell;
-		this.sdUserFax = sdUserFax;
-		this.sdUserMail = sdUserMail;
-		this.sdUserTypeId = sdUserTypeId;
-		this.sdUserCreate = sdUserCreate;
-		this.sdUserLastlogin = sdUserLastlogin;
+	public AbstractSdUser(String code, Integer exId, String name,
+			String password, String displayname, String country,
+			String province, String city, String company, String address,
+			String postcode, String web, String position, String tel,
+			String cell, String fax, String mail, Integer typeId,
+			Timestamp createTime, Timestamp lastlogin, Integer sysrecord,
+			Integer valid, String remark) {
+		this.code = code;
+		this.exId = exId;
+		this.name = name;
+		this.password = password;
+		this.displayname = displayname;
+		this.country = country;
+		this.province = province;
+		this.city = city;
+		this.company = company;
+		this.address = address;
+		this.postcode = postcode;
+		this.web = web;
+		this.position = position;
+		this.tel = tel;
+		this.cell = cell;
+		this.fax = fax;
+		this.mail = mail;
+		this.typeId = typeId;
+		this.createTime = createTime;
+		this.lastlogin = lastlogin;
+		this.sysrecord = sysrecord;
+		this.valid = valid;
+		this.remark = remark;
 	}
 
 	// Property accessors
 
-	public Integer getSdUserId() {
-		return this.sdUserId;
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setSdUserId(Integer sdUserId) {
-		this.sdUserId = sdUserId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getSdUserName() {
-		return this.sdUserName;
+	public String getCode() {
+		return this.code;
 	}
 
-	public void setSdUserName(String sdUserName) {
-		this.sdUserName = sdUserName;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-	public String getSdUserPassword() {
-		return this.sdUserPassword;
+	public Integer getExId() {
+		return this.exId;
 	}
 
-	public void setSdUserPassword(String sdUserPassword) {
-		this.sdUserPassword = sdUserPassword;
+	public void setExId(Integer exId) {
+		this.exId = exId;
 	}
 
-	public String getSdUserDisplayname() {
-		return this.sdUserDisplayname;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setSdUserDisplayname(String sdUserDisplayname) {
-		this.sdUserDisplayname = sdUserDisplayname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getSdUserCompany() {
-		return this.sdUserCompany;
+	public String getPassword() {
+		return this.password;
 	}
 
-	public void setSdUserCompany(String sdUserCompany) {
-		this.sdUserCompany = sdUserCompany;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getSdUserPosition() {
-		return this.sdUserPosition;
+	public String getDisplayname() {
+		return this.displayname;
 	}
 
-	public void setSdUserPosition(String sdUserPosition) {
-		this.sdUserPosition = sdUserPosition;
+	public void setDisplayname(String displayname) {
+		this.displayname = displayname;
 	}
 
-	public String getSdUserTel() {
-		return this.sdUserTel;
+	public String getCountry() {
+		return this.country;
 	}
 
-	public void setSdUserTel(String sdUserTel) {
-		this.sdUserTel = sdUserTel;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
-	public String getSdUserCell() {
-		return this.sdUserCell;
+	public String getProvince() {
+		return this.province;
 	}
 
-	public void setSdUserCell(String sdUserCell) {
-		this.sdUserCell = sdUserCell;
+	public void setProvince(String province) {
+		this.province = province;
 	}
 
-	public String getSdUserFax() {
-		return this.sdUserFax;
+	public String getCity() {
+		return this.city;
 	}
 
-	public void setSdUserFax(String sdUserFax) {
-		this.sdUserFax = sdUserFax;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public String getSdUserMail() {
-		return this.sdUserMail;
+	public String getCompany() {
+		return this.company;
 	}
 
-	public void setSdUserMail(String sdUserMail) {
-		this.sdUserMail = sdUserMail;
+	public void setCompany(String company) {
+		this.company = company;
 	}
 
-	public Integer getSdUserTypeId() {
-		return this.sdUserTypeId;
+	public String getAddress() {
+		return this.address;
 	}
 
-	public void setSdUserTypeId(Integer sdUserTypeId) {
-		this.sdUserTypeId = sdUserTypeId;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public Timestamp getSdUserCreate() {
-		return this.sdUserCreate;
+	public String getPostcode() {
+		return this.postcode;
 	}
 
-	public void setSdUserCreate(Timestamp sdUserCreate) {
-		this.sdUserCreate = sdUserCreate;
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
 
-	public Timestamp getSdUserLastlogin() {
-		return this.sdUserLastlogin;
+	public String getWeb() {
+		return this.web;
 	}
 
-	public void setSdUserLastlogin(Timestamp sdUserLastlogin) {
-		this.sdUserLastlogin = sdUserLastlogin;
+	public void setWeb(String web) {
+		this.web = web;
+	}
+
+	public String getPosition() {
+		return this.position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getTel() {
+		return this.tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getCell() {
+		return this.cell;
+	}
+
+	public void setCell(String cell) {
+		this.cell = cell;
+	}
+
+	public String getFax() {
+		return this.fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+
+	public String getMail() {
+		return this.mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public Integer getTypeId() {
+		return this.typeId;
+	}
+
+	public void setTypeId(Integer typeId) {
+		this.typeId = typeId;
+	}
+
+	public Timestamp getCreateTime() {
+		return this.createTime;
+	}
+
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
+
+	public Timestamp getLastlogin() {
+		return this.lastlogin;
+	}
+
+	public void setLastlogin(Timestamp lastlogin) {
+		this.lastlogin = lastlogin;
+	}
+
+	public Integer getSysrecord() {
+		return this.sysrecord;
+	}
+
+	public void setSysrecord(Integer sysrecord) {
+		this.sysrecord = sysrecord;
+	}
+
+	public Integer getValid() {
+		return this.valid;
+	}
+
+	public void setValid(Integer valid) {
+		this.valid = valid;
+	}
+
+	public String getRemark() {
+		return this.remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }

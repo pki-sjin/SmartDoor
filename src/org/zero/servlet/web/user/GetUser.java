@@ -2,7 +2,6 @@ package org.zero.servlet.web.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.zero.db.entity.user.SdUser;
-import org.zero.db.entity.user.SdUserDAO;
 
 public class GetUser extends HttpServlet {
 
@@ -28,8 +26,8 @@ public class GetUser extends HttpServlet {
 		response.setContentType("text/json");
 		PrintWriter out = response.getWriter();
 		JSONObject json = new JSONObject();
-		SdUser user = (SdUser)request.getSession().getAttribute("USER");
-		
+		SdUser user = (SdUser) request.getSession().getAttribute("USER");
+
 		if (user != null) {
 			if (user.needFilloutInfo()) {
 				json.put("status", 0);
@@ -38,7 +36,7 @@ public class GetUser extends HttpServlet {
 				json.put("status", 1);
 				json.put("data", "");
 			}
-			
+
 			json.put("user", user.getJSON());
 		} else {
 			json.put("status", -1);

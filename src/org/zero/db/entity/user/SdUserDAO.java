@@ -23,16 +23,27 @@ import org.slf4j.LoggerFactory;
 public class SdUserDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(SdUserDAO.class);
 	// property constants
-	public static final String SD_USER_NAME = "sdUserName";
-	public static final String SD_USER_PASSWORD = "sdUserPassword";
-	public static final String SD_USER_DISPLAYNAME = "sdUserDisplayname";
-	public static final String SD_USER_COMPANY = "sdUserCompany";
-	public static final String SD_USER_POSITION = "sdUserPosition";
-	public static final String SD_USER_TEL = "sdUserTel";
-	public static final String SD_USER_CELL = "sdUserCell";
-	public static final String SD_USER_FAX = "sdUserFax";
-	public static final String SD_USER_MAIL = "sdUserMail";
-	public static final String SD_USER_TYPE_ID = "sdUserTypeId";
+	public static final String CODE = "code";
+	public static final String EX_ID = "exId";
+	public static final String NAME = "name";
+	public static final String PASSWORD = "password";
+	public static final String DISPLAYNAME = "displayname";
+	public static final String COUNTRY = "country";
+	public static final String PROVINCE = "province";
+	public static final String CITY = "city";
+	public static final String COMPANY = "company";
+	public static final String ADDRESS = "address";
+	public static final String POSTCODE = "postcode";
+	public static final String WEB = "web";
+	public static final String POSITION = "position";
+	public static final String TEL = "tel";
+	public static final String CELL = "cell";
+	public static final String FAX = "fax";
+	public static final String MAIL = "mail";
+	public static final String TYPE_ID = "typeId";
+	public static final String SYSRECORD = "sysrecord";
+	public static final String VALID = "valid";
+	public static final String REMARK = "remark";
 
 	public void save(SdUser transientInstance) {
 		log.debug("saving SdUser instance");
@@ -98,44 +109,88 @@ public class SdUserDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findBySdUserName(Object sdUserName) {
-		return findByProperty(SD_USER_NAME, sdUserName);
+	public List findByCode(Object code) {
+		return findByProperty(CODE, code);
 	}
 
-	public List findBySdUserPassword(Object sdUserPassword) {
-		return findByProperty(SD_USER_PASSWORD, sdUserPassword);
+	public List findByExId(Object exId) {
+		return findByProperty(EX_ID, exId);
 	}
 
-	public List findBySdUserDisplayname(Object sdUserDisplayname) {
-		return findByProperty(SD_USER_DISPLAYNAME, sdUserDisplayname);
+	public List findByName(Object name) {
+		return findByProperty(NAME, name);
 	}
 
-	public List findBySdUserCompany(Object sdUserCompany) {
-		return findByProperty(SD_USER_COMPANY, sdUserCompany);
+	public List findByPassword(Object password) {
+		return findByProperty(PASSWORD, password);
 	}
 
-	public List findBySdUserPosition(Object sdUserPosition) {
-		return findByProperty(SD_USER_POSITION, sdUserPosition);
+	public List findByDisplayname(Object displayname) {
+		return findByProperty(DISPLAYNAME, displayname);
 	}
 
-	public List findBySdUserTel(Object sdUserTel) {
-		return findByProperty(SD_USER_TEL, sdUserTel);
+	public List findByCountry(Object country) {
+		return findByProperty(COUNTRY, country);
 	}
 
-	public List findBySdUserCell(Object sdUserCell) {
-		return findByProperty(SD_USER_CELL, sdUserCell);
+	public List findByProvince(Object province) {
+		return findByProperty(PROVINCE, province);
 	}
 
-	public List findBySdUserFax(Object sdUserFax) {
-		return findByProperty(SD_USER_FAX, sdUserFax);
+	public List findByCity(Object city) {
+		return findByProperty(CITY, city);
 	}
 
-	public List findBySdUserMail(Object sdUserMail) {
-		return findByProperty(SD_USER_MAIL, sdUserMail);
+	public List findByCompany(Object company) {
+		return findByProperty(COMPANY, company);
 	}
 
-	public List findBySdUserTypeId(Object sdUserTypeId) {
-		return findByProperty(SD_USER_TYPE_ID, sdUserTypeId);
+	public List findByAddress(Object address) {
+		return findByProperty(ADDRESS, address);
+	}
+
+	public List findByPostcode(Object postcode) {
+		return findByProperty(POSTCODE, postcode);
+	}
+
+	public List findByWeb(Object web) {
+		return findByProperty(WEB, web);
+	}
+
+	public List findByPosition(Object position) {
+		return findByProperty(POSITION, position);
+	}
+
+	public List findByTel(Object tel) {
+		return findByProperty(TEL, tel);
+	}
+
+	public List findByCell(Object cell) {
+		return findByProperty(CELL, cell);
+	}
+
+	public List findByFax(Object fax) {
+		return findByProperty(FAX, fax);
+	}
+
+	public List findByMail(Object mail) {
+		return findByProperty(MAIL, mail);
+	}
+
+	public List findByTypeId(Object typeId) {
+		return findByProperty(TYPE_ID, typeId);
+	}
+
+	public List findBySysrecord(Object sysrecord) {
+		return findByProperty(SYSRECORD, sysrecord);
+	}
+
+	public List findByValid(Object valid) {
+		return findByProperty(VALID, valid);
+	}
+
+	public List findByRemark(Object remark) {
+		return findByProperty(REMARK, remark);
 	}
 
 	public List findAll() {

@@ -6,45 +6,78 @@
 -->
 <hibernate-mapping>
     <class name="org.zero.db.entity.user.SdUser" table="sd_user" catalog="smartdoor">
-        <id name="sdUserId" type="java.lang.Integer">
-            <column name="sd_user_id" />
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="sdUserName" type="java.lang.String">
-            <column name="sd_user_name" length="45" not-null="true" unique="true" />
+        <property name="code" type="java.lang.String">
+            <column name="code" length="45" not-null="true" unique="true" />
         </property>
-        <property name="sdUserPassword" type="java.lang.String">
-            <column name="sd_user_password" length="45" not-null="true" />
+        <property name="exId" type="java.lang.Integer">
+            <column name="ex_id" not-null="true" />
         </property>
-        <property name="sdUserDisplayname" type="java.lang.String">
-            <column name="sd_user_displayname" length="45" not-null="true" />
+        <property name="name" type="java.lang.String">
+            <column name="name" length="45" not-null="true" />
         </property>
-        <property name="sdUserCompany" type="java.lang.String">
-            <column name="sd_user_company" length="100" />
+        <property name="password" type="java.lang.String">
+            <column name="password" length="45" not-null="true" />
         </property>
-        <property name="sdUserPosition" type="java.lang.String">
-            <column name="sd_user_position" length="45" />
+        <property name="displayname" type="java.lang.String">
+            <column name="displayname" length="45" />
         </property>
-        <property name="sdUserTel" type="java.lang.String">
-            <column name="sd_user_tel" length="45" />
+        <property name="country" type="java.lang.String">
+            <column name="country" length="45" />
         </property>
-        <property name="sdUserCell" type="java.lang.String">
-            <column name="sd_user_cell" length="45" />
+        <property name="province" type="java.lang.String">
+            <column name="province" length="45" />
         </property>
-        <property name="sdUserFax" type="java.lang.String">
-            <column name="sd_user_fax" length="45" />
+        <property name="city" type="java.lang.String">
+            <column name="city" length="45" />
         </property>
-        <property name="sdUserMail" type="java.lang.String">
-            <column name="sd_user_mail" length="45" />
+        <property name="company" type="java.lang.String">
+            <column name="company" length="100" />
         </property>
-        <property name="sdUserTypeId" type="java.lang.Integer">
-            <column name="sd_user_type_id" not-null="true" />
+        <property name="address" type="java.lang.String">
+            <column name="address" length="45" />
         </property>
-        <property name="sdUserCreate" type="java.sql.Timestamp">
-            <column name="sd_user_create" length="19" not-null="true" />
+        <property name="postcode" type="java.lang.String">
+            <column name="postcode" length="45" />
         </property>
-        <property name="sdUserLastlogin" type="java.sql.Timestamp">
-            <column name="sd_user_lastlogin" length="19" not-null="true" />
+        <property name="web" type="java.lang.String">
+            <column name="web" length="45" />
+        </property>
+        <property name="position" type="java.lang.String">
+            <column name="position" length="45" />
+        </property>
+        <property name="tel" type="java.lang.String">
+            <column name="tel" length="45" />
+        </property>
+        <property name="cell" type="java.lang.String">
+            <column name="cell" length="45" />
+        </property>
+        <property name="fax" type="java.lang.String">
+            <column name="fax" length="45" />
+        </property>
+        <property name="mail" type="java.lang.String">
+            <column name="mail" length="45" />
+        </property>
+        <property name="typeId" type="java.lang.Integer">
+            <column name="type_id" not-null="true" />
+        </property>
+        <property name="createTime" type="java.sql.Timestamp">
+            <column name="createTime" length="19" not-null="true" />
+        </property>
+        <property name="lastlogin" type="java.sql.Timestamp">
+            <column name="lastlogin" length="19" not-null="true" />
+        </property>
+        <property name="sysrecord" type="java.lang.Integer">
+            <column name="sysrecord" not-null="true" />
+        </property>
+        <property name="valid" type="java.lang.Integer">
+            <column name="valid" not-null="true" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="remark" length="200" />
         </property>
     </class>
 </hibernate-mapping>

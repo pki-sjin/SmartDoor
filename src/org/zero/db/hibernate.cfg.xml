@@ -23,10 +23,11 @@
 		<mapping resource="org/zero/db/entity/user/SdUser.hbm.xml" />
 		<mapping
 			resource="org/zero/db/entity/exhibition/SdExhibition.hbm.xml" />
-		<mapping
-			resource="org/zero/db/entity/relation/SdExStageRelation.hbm.xml" />
 		<mapping resource="org/zero/db/entity/stage/SdStage.hbm.xml" />
 		<mapping resource="org/zero/db/entity/sms/SdValidation.hbm.xml" />
+		<mapping
+			resource="org/zero/db/entity/activity/SdExUserRelation.hbm.xml" />
+		<mapping resource="org/zero/db/entity/join/SdJoin.hbm.xml" />
 
 	</session-factory>
 

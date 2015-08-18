@@ -6,21 +6,33 @@
 -->
 <hibernate-mapping>
     <class name="org.zero.db.entity.sms.SdValidation" table="sd_validation" catalog="smartdoor">
-        <id name="sdValidationId" type="java.lang.Integer">
-            <column name="sd_validation_id" />
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="sdValidationCell" type="java.lang.String">
-            <column name="sd_validation_cell" length="45" not-null="true" />
+        <property name="cell" type="java.lang.String">
+            <column name="cell" length="45" not-null="true" />
         </property>
-        <property name="sdValidationCode" type="java.lang.String">
-            <column name="sd_validation_code" length="45" not-null="true" />
+        <property name="code" type="java.lang.String">
+            <column name="code" length="45" not-null="true" />
         </property>
-        <property name="sdValidationTag" type="java.lang.String">
-            <column name="sd_validation_tag" length="45" not-null="true" />
+        <property name="tag" type="java.lang.String">
+            <column name="tag" length="45" not-null="true" />
         </property>
-        <property name="sdValidationCreate" type="java.sql.Timestamp">
-            <column name="sd_validation_create" length="19" not-null="true" />
+        <property name="event" type="java.lang.String">
+            <column name="event" length="200" not-null="true" />
+        </property>
+        <property name="createTime" type="java.sql.Timestamp">
+            <column name="createTime" length="19" not-null="true" />
+        </property>
+        <property name="sysrecord" type="java.lang.Integer">
+            <column name="sysrecord" not-null="true" />
+        </property>
+        <property name="valid" type="java.lang.Integer">
+            <column name="valid" not-null="true" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="remark" length="200" />
         </property>
     </class>
 </hibernate-mapping>

@@ -21,7 +21,7 @@ public class EditUser extends HttpServlet {
 	public EditUser() {
 		super();
 	}
-	
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -34,18 +34,18 @@ public class EditUser extends HttpServlet {
 		String cell = request.getParameter("cell");
 		String fax = request.getParameter("fax");
 		String email = request.getParameter("email");
-		
+
 		JSONObject json = new JSONObject();
-		SdUser user = (SdUser)request.getSession().getAttribute("USER");
+		SdUser user = (SdUser) request.getSession().getAttribute("USER");
 		if (user != null) {
 			SdUserDAO dao = new SdUserDAO();
-			user.setSdUserDisplayname(display);
-			user.setSdUserCompany(company);
-			user.setSdUserPosition(position);
-			user.setSdUserCell(cell);
-			user.setSdUserTel(phone);
-			user.setSdUserFax(fax);
-			user.setSdUserMail(email);
+			user.setDisplayname(display);
+			user.setCompany(company);
+			user.setPosition(position);
+			user.setCell(cell);
+			user.setTel(phone);
+			user.setFax(fax);
+			user.setMail(email);
 			Transaction transaction = dao.getSession().beginTransaction();
 			dao.attachDirty(user);
 			json.put("status", 1);

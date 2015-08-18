@@ -2,22 +2,29 @@ package org.zero.db.entity.exhibition;
 
 import java.sql.Timestamp;
 
-
 /**
  * SdExhibition entity. @author MyEclipse Persistence Tools
  */
-public class SdExhibition extends AbstractSdExhibition implements java.io.Serializable {
+public class SdExhibition extends AbstractSdExhibition implements
+		java.io.Serializable {
 
-    // Constructors
+	// Constructors
 
-    /** default constructor */
-    public SdExhibition() {
-    }
+	/** default constructor */
+	public SdExhibition() {
+	}
 
-    
-    /** full constructor */
-    public SdExhibition(String sdExSubject, String sdExHtml, Timestamp sdExStart, Timestamp sdExEnd) {
-        super(sdExSubject, sdExHtml, sdExStart, sdExEnd);        
-    }
-   
+	/** minimal constructor */
+	public SdExhibition(String code, String subject, String html,
+			Timestamp start, Timestamp end, Integer sysrecord, Integer valid) {
+		super(code, subject, html, start, end, sysrecord, valid);
+	}
+
+	/** full constructor */
+	public SdExhibition(String code, String subject, String html,
+			Timestamp start, Timestamp end, Integer sysrecord, Integer valid,
+			String remark) {
+		super(code, subject, html, start, end, sysrecord, valid, remark);
+	}
+
 }

@@ -2,87 +2,129 @@ package org.zero.db.entity.exhibition;
 
 import java.sql.Timestamp;
 
-
 /**
- * AbstractSdExhibition entity provides the base persistence definition of the SdExhibition entity. @author MyEclipse Persistence Tools
+ * AbstractSdExhibition entity provides the base persistence definition of the
+ * SdExhibition entity. @author MyEclipse Persistence Tools
  */
 
-public abstract class AbstractSdExhibition  implements java.io.Serializable {
+public abstract class AbstractSdExhibition implements java.io.Serializable {
 
+	// Fields
 
-    // Fields    
+	private Integer id;
+	private String code;
+	private String subject;
+	private String html;
+	private Timestamp start;
+	private Timestamp end;
+	private Integer sysrecord;
+	private Integer valid;
+	private String remark;
 
-     private Integer sdExId;
-     private String sdExSubject;
-     private String sdExHtml;
-     private Timestamp sdExStart;
-     private Timestamp sdExEnd;
+	// Constructors
 
+	/** default constructor */
+	public AbstractSdExhibition() {
+	}
 
-    // Constructors
+	/** minimal constructor */
+	public AbstractSdExhibition(String code, String subject, String html,
+			Timestamp start, Timestamp end, Integer sysrecord, Integer valid) {
+		this.code = code;
+		this.subject = subject;
+		this.html = html;
+		this.start = start;
+		this.end = end;
+		this.sysrecord = sysrecord;
+		this.valid = valid;
+	}
 
-    /** default constructor */
-    public AbstractSdExhibition() {
-    }
+	/** full constructor */
+	public AbstractSdExhibition(String code, String subject, String html,
+			Timestamp start, Timestamp end, Integer sysrecord, Integer valid,
+			String remark) {
+		this.code = code;
+		this.subject = subject;
+		this.html = html;
+		this.start = start;
+		this.end = end;
+		this.sysrecord = sysrecord;
+		this.valid = valid;
+		this.remark = remark;
+	}
 
-    
-    /** full constructor */
-    public AbstractSdExhibition(String sdExSubject, String sdExHtml, Timestamp sdExStart, Timestamp sdExEnd) {
-        this.sdExSubject = sdExSubject;
-        this.sdExHtml = sdExHtml;
-        this.sdExStart = sdExStart;
-        this.sdExEnd = sdExEnd;
-    }
+	// Property accessors
 
-   
-    // Property accessors
+	public Integer getId() {
+		return this.id;
+	}
 
-    public Integer getSdExId() {
-        return this.sdExId;
-    }
-    
-    public void setSdExId(Integer sdExId) {
-        this.sdExId = sdExId;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getSdExSubject() {
-        return this.sdExSubject;
-    }
-    
-    public void setSdExSubject(String sdExSubject) {
-        this.sdExSubject = sdExSubject;
-    }
+	public String getCode() {
+		return this.code;
+	}
 
-    public String getSdExHtml() {
-        return this.sdExHtml;
-    }
-    
-    public void setSdExHtml(String sdExHtml) {
-        this.sdExHtml = sdExHtml;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public Timestamp getSdExStart() {
-        return this.sdExStart;
-    }
-    
-    public void setSdExStart(Timestamp sdExStart) {
-        this.sdExStart = sdExStart;
-    }
+	public String getSubject() {
+		return this.subject;
+	}
 
-    public Timestamp getSdExEnd() {
-        return this.sdExEnd;
-    }
-    
-    public void setSdExEnd(Timestamp sdExEnd) {
-        this.sdExEnd = sdExEnd;
-    }
-   
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 
+	public String getHtml() {
+		return this.html;
+	}
 
+	public void setHtml(String html) {
+		this.html = html;
+	}
 
+	public Timestamp getStart() {
+		return this.start;
+	}
 
+	public void setStart(Timestamp start) {
+		this.start = start;
+	}
 
+	public Timestamp getEnd() {
+		return this.end;
+	}
 
+	public void setEnd(Timestamp end) {
+		this.end = end;
+	}
 
+	public Integer getSysrecord() {
+		return this.sysrecord;
+	}
+
+	public void setSysrecord(Integer sysrecord) {
+		this.sysrecord = sysrecord;
+	}
+
+	public Integer getValid() {
+		return this.valid;
+	}
+
+	public void setValid(Integer valid) {
+		this.valid = valid;
+	}
+
+	public String getRemark() {
+		return this.remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
 }

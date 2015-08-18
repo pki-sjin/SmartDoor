@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.zero.db.entity.relation.SdExStageRelation;
-import org.zero.db.entity.relation.SdExStageRelationDAO;
 import org.zero.db.entity.stage.SdStage;
 import org.zero.db.entity.stage.SdStageDAO;
 
@@ -33,16 +31,13 @@ public class GetStage extends HttpServlet {
 		String ex_id = request.getParameter("ex_id");
 		JSONObject json = new JSONObject();
 		JSONArray array = new JSONArray();
-		SdExStageRelationDAO relationDao = new SdExStageRelationDAO();
 		SdStageDAO stageDao = new SdStageDAO();
-		List<SdExStageRelation> list = relationDao.findBySdExId(Integer
-				.parseInt(ex_id));
-		for (SdExStageRelation relation : list) {
+		List<SdStage> list = stageDao.findByExId(Integer.parseInt(ex_id));
+		for (SdStage stage : list) {
 			JSONObject json_ex = new JSONObject();
-			SdStage stage = stageDao.findById(relation.getSdStageId());
-			json_ex.put("id", stage.getSdStageId());
-			json_ex.put("subject", stage.getSdStageSubject());
-			json_ex.put("url", stage.getSdStageHtml());
+			json_ex.put("id", stage.getId());
+			json_ex.put("subject", stage.getSubject());
+			json_ex.put("url", stage.getHtml());
 			array.put(json_ex);
 		}
 		json.put("list", array);

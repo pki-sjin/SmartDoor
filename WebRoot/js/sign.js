@@ -3,7 +3,7 @@ $(function(){
 		$("#sendCode").click(function(){
 			$("#sendCode").addClass("ui-state-disabled");
 			var button = $("#sendCode").contents()[0];
-			var time = 5;
+			var time = 60;
 			button.data = time-- + "秒后可再次发送";
 			var interval = setInterval(function(){
 				if (time == 0) {
@@ -22,6 +22,7 @@ $(function(){
 				success: function(resp){
 					console.log(resp);
 					if(resp.status == 1) {
+						showErrorMessage("短信发送成功");
 						$("#username").attr("data-sms",resp.id);
 						$("#codeTag").html("短信识别码:" + resp.tag).show();
 					} else {
@@ -61,8 +62,7 @@ $(function(){
 			}
 			
 			if (!sms_id) {
-				showErrorMessage("请输入正确的验证码");
-				return;
+				sms_id = 0;
 			}
 			showLoading();
 			$.ajax({
