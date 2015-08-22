@@ -28,24 +28,36 @@ public class EditUser extends HttpServlet {
 		response.setContentType("text/json");
 		PrintWriter out = response.getWriter();
 		String display = request.getParameter("display");
+		String country = request.getParameter("country");
+		String province = request.getParameter("province");
+		String city = request.getParameter("city");
 		String company = request.getParameter("company");
+		String address = request.getParameter("address");
+		String web = request.getParameter("web");
+		String postcode = request.getParameter("postcode");
 		String position = request.getParameter("position");
-		String phone = request.getParameter("phone");
+		String tel = request.getParameter("tel");
 		String cell = request.getParameter("cell");
 		String fax = request.getParameter("fax");
-		String email = request.getParameter("email");
-
+		String mail = request.getParameter("mail");
+		
 		JSONObject json = new JSONObject();
 		SdUser user = (SdUser) request.getSession().getAttribute("USER");
 		if (user != null) {
 			SdUserDAO dao = new SdUserDAO();
 			user.setDisplayname(display);
+			user.setCountry(country);
+			user.setProvince(province);
+			user.setCity(city);
 			user.setCompany(company);
+			user.setAddress(address);
+			user.setWeb(web);
+			user.setPostcode(postcode);
 			user.setPosition(position);
+			user.setTel(tel);
 			user.setCell(cell);
-			user.setTel(phone);
 			user.setFax(fax);
-			user.setMail(email);
+			user.setMail(mail);
 			Transaction transaction = dao.getSession().beginTransaction();
 			dao.attachDirty(user);
 			json.put("status", 1);

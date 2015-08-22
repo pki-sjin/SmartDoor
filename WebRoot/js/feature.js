@@ -12,25 +12,38 @@ $(function(){
 		
 		$("#edit").click(function(e){
 			var display = $("#display").val();
+			var country = $("#country").val();
+			var province = $("#province").val();
+			var city = $("#city").val();
 			var company = $("#company").val();
+			var address = $("#address").val();
+			var web = $("#web").val();
+			var postcode = $("#postcode").val();
 			var position = $("#position").val();
-			var phone = $("#phone").val();
+			var tel = $("#tel").val();
 			var cell = $("#cell").val();
 			var fax = $("#fax").val();
-			var email = $("#email").val();
+			var mail = $("#mail").val();
 			
-			if (!display || !company || !position || !phone || !cell || !fax || !email) {
+			if (!display || !country || !province || !city || !company || !address || !postcode ||
+					!position || !tel || !cell || !fax || !mail || !web) {
 				showErrorMessage("请将资料填写完整");
 				return;
 			}
 			
 			var postStr = "display=" + display +
+							"&country=" + country +
+							"&province=" + province +
+							"&city=" + city +
 							"&company=" + company +
+							"&address=" + address +
+							"&web=" + web +
+							"&postcode=" + postcode +
 							"&position=" + position +
-							"&phone=" + phone +
+							"&tel=" + tel +
 							"&cell=" + cell +
 							"&fax=" + fax +
-							"&email=" + email;
+							"&mail=" + mail;
 			
 			showLoading();
 			$.ajax({
@@ -67,12 +80,18 @@ $(function(){
 					var user = resp.user;
 					$("#displayHeader").text(user.display ? user.display : user.username);
 					$("#display").val(user.display);
+					$("#country").val(user.country);
+					$("#province").val(user.province);
+					$("#city").val(user.city);
 					$("#company").val(user.company);
+					$("#address").val(user.address);
+					$("#web").val(user.web);
+					$("#postcode").val(user.postcode);
 					$("#position").val(user.position);
-					$("#phone").val(user.tel);
+					$("#tel").val(user.tel);
 					$("#cell").val(user.cell);
 					$("#fax").val(user.fax);
-					$("#email").val(user.mail);
+					$("#mail").val(user.mail);
 				} else {
 					window.location = "../index.html";
 				}
@@ -202,15 +221,25 @@ $(function(){
 							action.text("展会已结束");
 						}
 						action.click(function(e){
+							var maxHeight = $( window ).height() - 68;
+							if (maxHeight < 180) {
+								maxHeight = 180;
+							} else if (maxHeight > 300) {
+								maxHeight = 300;
+							}
+							var maxWidth = $( window ).width() - 30;
+							if (maxHeight > maxWidth) {
+								maxHeight = maxWidth;
+							}
 							$.ajax({
 								url: "../Join",
 								type: "POST",
-								data: "join_id=" + ac.join_id + "&order_id=" + ac.order_id,
+								data: "join_id=" + ac.join_id + "&order_id=" + ac.order_id +"&size=" + maxHeight,
 								success: function(resp){
 									console.log(resp);
 									var closebtn = '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>',
 									            header = '<div data-role="header"><h2>活动详情</h2></div>',
-									            content = '<div id="qrcodeImg" align="center"></div><div id="qrcodeSend" align="center"><div id="sendQRCode" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">发送二维码到手机<input type="button" data-enhanced="true" value="发送二维码到手机"></div></div><div id="qrcodeTips" align="center"></div><div class="qrcodePayDiv"><fieldset id="qrcodePay" data-role="controlgroup"><input type="radio" name="radio-choice-pay" id="radio-choice-pay-alipay" value="alipay" checked="checked"><label for="radio-choice-pay-alipay">支付宝支付</label><input type="radio" name="radio-choice-pay" id="radio-choice-pay-wechat" value="wechat"><label for="radio-choice-pay-wechat">微信支付</label></fieldset><div id="qrcodeGoToPay" class="ui-input-btn ui-btn ui-corner-all ui-shadow">前往支付<input type="button" data-enhanced="true" value="前往支付"></div></div>',
+									            content = '<div id="qrcodeImg" align="center"></div><div id="qrcodeSend" align="center"><div id="sendQRCode" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">发送二维码到手机<input type="button" data-enhanced="true" value="发送二维码到手机"></div></div><div id="qrcodeTips" align="center"></div><div id="purchaseDiv" align="center"><div id="onlinePurchase" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">在线购票<input type="button" data-enhanced="true" value="在线购票"></div></div></div>',
 									            popup = '<div data-role="popup" id="popup-activity" data-corners="false" data-tolerance="15"></div>';
 									        // Create the popup.
 									        $( header )
@@ -227,15 +256,12 @@ $(function(){
 									$("#qrcodeTips").text(resp.message);
 									
 									if (ac.join_id == 1 || ac.join_id == 2 || ac.join_id == 5) {
-										$("#qrcodePay").controlgroup();
-										$("#qrcodeGoToPay").click(function(e){
-											alert("pay");
+										$("#purchaseDiv").show();
+										$("#onlinePurchase").click(function(e) {
+											window.open("tickets.html");
 										});
-										$(".qrcodePayDiv").show();
 									}
 									
-									var maxHeight = $( window ).height() - 68;
-									var maxWidth = $( window ).width() - 30;
 									$("#popup-activity").css("width",maxHeight);
 									$("#popup-activity").css("maxWidth",maxWidth);
 									$("#popup-activity").popup("open");
@@ -269,7 +295,7 @@ $(function(){
 	      	}
 		});
 		
-		$( document ).on( "popupafterclose", ".ui-popup", function() {
+		$( document ).on( "popupafterclose", "#popup-activity,#popup-stage", function() {
 			 $( this ).remove();
 		});
 	});

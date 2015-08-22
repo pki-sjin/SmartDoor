@@ -28,6 +28,9 @@
 		<mapping
 			resource="org/zero/db/entity/activity/SdExUserRelation.hbm.xml" />
 		<mapping resource="org/zero/db/entity/join/SdJoin.hbm.xml" />
+		<mapping
+			resource="org/zero/db/entity/ticket/SdTicketType.hbm.xml" />
+		<mapping resource="org/zero/db/entity/ticket/SdTicket.hbm.xml" />
 
 	</session-factory>
 

@@ -31,11 +31,12 @@ public class Join extends HttpServlet {
 		JSONObject json = new JSONObject();
 		int join_id = Integer.parseInt(request.getParameter("join_id"));
 		int order_id = Integer.parseInt(request.getParameter("order_id"));
-
+		int size = Integer.parseInt(request.getParameter("size"));
+		
 		SdUser user = (SdUser) request.getSession().getAttribute("USER");
 		String imgBase64 = "data:image/png;base64,";
 		try {
-			imgBase64 += EncodingHandler.createQRCode(user.getName(), 250);
+			imgBase64 += EncodingHandler.createQRCode(user.getName(), size);
 		} catch (WriterException e) {
 			// give a error picture
 		}
