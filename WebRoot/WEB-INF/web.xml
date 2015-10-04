@@ -2,6 +2,9 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<listener>
+		<listener-class>org.zero.listener.ApplicationListener</listener-class>
+	</listener>
 	<filter>
 		<filter-name>AuthFilter</filter-name>
 		<filter-class>org.zero.filter.AuthFilter</filter-class>
@@ -70,14 +73,39 @@
 		<servlet-name>GetStage</servlet-name>
 		<servlet-class>org.zero.servlet.web.stage.GetStage</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>GetTickets</servlet-name>
+		<servlet-class>org.zero.servlet.web.ticket.GetTickets</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>NotifyViaAlipay</servlet-name>
+		<servlet-class>org.zero.servlet.web.activity.NotifyViaAlipay</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ReturnViaAlipay</servlet-name>
+		<servlet-class>org.zero.servlet.web.activity.ReturnViaAlipay</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SendQRCode</servlet-name>
+		<servlet-class>org.zero.servlet.web.mms.SendQRCode</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GetInvoice</servlet-name>
+		<servlet-class>org.zero.servlet.web.activity.GetInvoice</servlet-class>
+	</servlet>
   <servlet>
-    <servlet-name>GetTickets</servlet-name>
-    <servlet-class>org.zero.servlet.web.ticket.GetTickets</servlet-class>
+    <servlet-name>NotifyViaWx</servlet-name>
+    <servlet-class>org.zero.servlet.web.activity.NotifyViaWx</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>Notify</servlet-name>
-    <servlet-class>org.zero.servlet.web.activity.Notify</servlet-class>
+    <servlet-name>WxPayCheck</servlet-name>
+    <servlet-class>org.zero.servlet.web.wechat.WxPayCheck</servlet-class>
   </servlet>
+
+
+
+
+
 
 
 
@@ -145,39 +173,122 @@
 		<servlet-name>GetStage</servlet-name>
 		<url-pattern>/GetStage</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetTickets</servlet-name>
+		<url-pattern>/GetTickets</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>NotifyViaAlipay</servlet-name>
+		<url-pattern>/NotifyViaAlipay</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ReturnViaAlipay</servlet-name>
+		<url-pattern>/ReturnViaAlipay</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SendQRCode</servlet-name>
+		<url-pattern>/SendQRCode</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetInvoice</servlet-name>
+		<url-pattern>/GetInvoice</url-pattern>
+	</servlet-mapping>
   <servlet-mapping>
-    <servlet-name>GetTickets</servlet-name>
-    <url-pattern>/GetTickets</url-pattern>
+    <servlet-name>NotifyViaWx</servlet-name>
+    <url-pattern>/NotifyViaWx</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>Notify</servlet-name>
-    <url-pattern>/Notify</url-pattern>
+    <servlet-name>WxPayCheck</servlet-name>
+    <url-pattern>/WxPayCheck</url-pattern>
   </servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
-	<context-param>
-		<param-name>sendSmsUrl</param-name>
-		<param-value>http://58.246.39.26:9195/communication/sendSms.ashx</param-value>
-	</context-param>
-	<context-param>
-		<param-name>fetchReportUrl</param-name>
-		<param-value>http://58.246.39.26:9195/communication/fetchReports.ashx</param-value>
-	</context-param>
-	<context-param>
-		<param-name>cid</param-name>
-		<param-value>9009</param-value>
-	</context-param>
-	<context-param>
-		<param-name>pwd</param-name>
-		<param-value>hzyp</param-value>
-	</context-param>
-	<context-param>
-		<param-name>productid</param-name>
-		<param-value>20120629</param-value>
-	</context-param>
+
+	<!-- 展会信息 -->
 	<context-param>
 		<param-name>ActivedExhibitionId</param-name>
 		<param-value>1</param-value>
+	</context-param>
+
+	<!--  短信发送参数 -->
+	<context-param>
+		<param-name>clientId</param-name>
+		<param-value>8</param-value>
+	</context-param>
+	<context-param>
+		<param-name>loginName</param-name>
+		<param-value>1008</param-value>
+	</context-param>
+	<context-param>
+		<param-name>password</param-name>
+		<param-value>1008</param-value>
+	</context-param>
+	<context-param>
+		<param-name>serverIp</param-name>
+		<param-value>58.246.39.26</param-value>
+	</context-param>
+	<context-param>
+		<param-name>serverPort</param-name>
+		<param-value>5623</param-value>
+	</context-param>
+
+	<!-- 支付宝参数 -->
+	<context-param>
+		<param-name>alipay_pid</param-name>
+		<param-value>2088021468821246</param-value>
+	</context-param>
+	<context-param>
+		<param-name>alipay_email</param-name>
+		<param-value>3250741387@qq.com</param-value>
+	</context-param>
+	<context-param>
+		<param-name>alipay_key</param-name>
+		<param-value>4uulhlqlbrbl4bywi68i9rubv2thyjkz</param-value>
+	</context-param>
+	<context-param>
+		<param-name>alipay_notify_url</param-name>
+		<param-value>http://localhost:8080/SmartDoor/NotifyViaAlipay</param-value>
+	</context-param>
+	<context-param>
+		<param-name>alipay_return_url</param-name>
+		<param-value>http://localhost:8080/SmartDoor/ReturnViaAlipay</param-value>
+	</context-param>
+	<!-- 微信参数 -->
+	<context-param>
+		<param-name>wx_appid</param-name>
+		<param-value>wx2428e34e0e7dc6ef</param-value>
+	</context-param>
+	<context-param>
+		<param-name>wx_mchid</param-name>
+		<param-value>1233410002</param-value>
+	</context-param>
+	<context-param>
+		<param-name>wx_key</param-name>
+		<param-value>e10adc3849ba56abbe56e056f20f883e</param-value>
+	</context-param>
+	<context-param>
+		<param-name>wx_appsecret</param-name>
+		<param-value>51c56b886b5be869567dd389b3e5d1d6</param-value>
+	</context-param>
+	<context-param>
+		<param-name>wx_sslcert_path</param-name>
+		<param-value>apiclient_cert.p12</param-value>
+	</context-param>
+	<context-param>
+		<param-name>wx_sslcert_password</param-name>
+		<param-value>1233410002</param-value>
+	</context-param>
+	<context-param>
+		<param-name>wx_notify_url</param-name>
+		<param-value>http://localhost:8080/SmartDoor/NotifyViaWx</param-value>
+	</context-param>
+	<context-param>
+		<param-name>wx_ip</param-name>
+		<param-value>8.8.8.8</param-value>
+	</context-param>
+	<context-param>
+		<param-name>wx_proxy_url</param-name>
+		<param-value>http://10.152.18.220:8080</param-value>
 	</context-param>
 </web-app>

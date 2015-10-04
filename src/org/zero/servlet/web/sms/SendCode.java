@@ -14,15 +14,11 @@ import org.hibernate.Transaction;
 import org.json.JSONObject;
 import org.zero.db.entity.sms.SdValidation;
 import org.zero.db.entity.sms.SdValidationDAO;
-import org.zero.tool.Util;
+
+import com.lxt2.protocol.common.Standard_SeqNum;
+import com.wxtl.smszd.SendSmsZD;
 
 public class SendCode extends HttpServlet {
-
-	private String sendSmsUrl;
-	private String fetchReportUrl;
-	private String cid;
-	private String pwd;
-	private String productid;
 
 	/**
 	 * Constructor of the object.
@@ -34,11 +30,6 @@ public class SendCode extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		sendSmsUrl = getServletContext().getInitParameter("sendSmsUrl");
-		fetchReportUrl = getServletContext().getInitParameter("fetchReportUrl");
-		cid = getServletContext().getInitParameter("cid");
-		pwd = getServletContext().getInitParameter("pwd");
-		productid = getServletContext().getInitParameter("productid");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -57,10 +48,9 @@ public class SendCode extends HttpServlet {
 					+ validation.getTag() + "),30分钟内有效。[国展中心]";
 			System.out.println(message);
 			// TODO: 调用发送短信模块
-			boolean result = Util.sendSms(sendSmsUrl, cid, pwd, productid,
-					cell, message);
-			if (result) {
-				Util.fetchReport(fetchReportUrl, cid, pwd);
+			boolean result = SendSmsZD.sendSms(cell, message, 1,
+					Standard_SeqNum.computeSeqNoErr(2));
+			if (!result) {
 				Transaction transaction = dao.getSession().beginTransaction();
 				dao.save(validation);
 				transaction.commit();

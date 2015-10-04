@@ -15,7 +15,7 @@ public class SdExUserRelation extends AbstractSdExUserRelation implements java.i
 
     
     /** full constructor */
-    public SdExUserRelation(Integer exId, Integer userId, Integer joinId, Integer orderId) {
+    public SdExUserRelation(Integer exId, Integer userId, Integer joinId, Long orderId) {
         super(exId, userId, joinId, orderId);        
     }
    

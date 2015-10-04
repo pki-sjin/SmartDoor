@@ -30,9 +30,8 @@ public class Join extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		JSONObject json = new JSONObject();
 		int join_id = Integer.parseInt(request.getParameter("join_id"));
-		int order_id = Integer.parseInt(request.getParameter("order_id"));
 		int size = Integer.parseInt(request.getParameter("size"));
-		
+
 		SdUser user = (SdUser) request.getSession().getAttribute("USER");
 		String imgBase64 = "data:image/png;base64,";
 		try {

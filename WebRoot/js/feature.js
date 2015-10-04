@@ -207,12 +207,19 @@ $(function(){
 						var td1 = $("<td><a target='new' href='" + ac.url + "'>" + ac.subject + "</a></td>");
 						var td2 = $("<td></td>");
 						var action = $("<a href='#'></a>");
+						var action2 = null;
 						if (ac.join_id == 1) {
 							action.text("可以参加");
 						} else if (ac.join_id == 2) {
 							action.text("门票未购买");
 						} else if (ac.join_id == 3) {
 							action.text("门票已购买");
+							action2 = $("<a href='#'></a>");
+							action2.text("支付凭证");
+							action2.css("padding-left","10px");
+							action2.click(function(e){
+								window.open("invoice.html");
+							});
 						} else if (ac.join_id == 4) {
 							action.text("已参加");
 						} else if (ac.join_id == 5) {
@@ -239,7 +246,7 @@ $(function(){
 									console.log(resp);
 									var closebtn = '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>',
 									            header = '<div data-role="header"><h2>活动详情</h2></div>',
-									            content = '<div id="qrcodeImg" align="center"></div><div id="qrcodeSend" align="center"><div id="sendQRCode" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">发送二维码到手机<input type="button" data-enhanced="true" value="发送二维码到手机"></div></div><div id="qrcodeTips" align="center"></div><div id="purchaseDiv" align="center"><div id="onlinePurchase" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">在线购票<input type="button" data-enhanced="true" value="在线购票"></div></div></div>',
+									            content = '<div id="qrcodeImg" align="center"></div><div id="qrcodeSend" align="center"><div id="sendQRCode" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">发送二维码到手机<input type="button" data-enhanced="true" value="发送二维码到手机"></div></div><div id="qrcodeTips" align="center"></div><div id="purchaseDiv" align="center"><div id="onlinePurchase" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">在线购票<input type="button" data-enhanced="true" value="在线购票"></div></div>',
 									            popup = '<div data-role="popup" id="popup-activity" data-corners="false" data-tolerance="15"></div>';
 									        // Create the popup.
 									        $( header )
@@ -262,6 +269,35 @@ $(function(){
 										});
 									}
 									
+									$("#sendQRCode").click(function(e){
+										$("#sendQRCode").addClass("ui-state-disabled");
+										var button = $("#sendQRCode").contents()[0];
+										var time = 60;
+										button.data = time-- + "秒后可再次发送";
+										var interval = setInterval(function(){
+											if (time == 0) {
+												clearInterval(interval);
+												$("#sendQRCode").removeClass("ui-state-disabled");
+												button.data = "发送二维码到手机";
+											} else {
+												button.data = time-- + "秒后可再次发送";
+											}
+										}, 1000);
+										
+										$.ajax({
+											url: "../SendQRCode",
+											data: "imgBase64=" + resp.qrcode,
+											type: "POST",
+											success: function(resp){
+												console.log(resp);
+												alert(resp.data);
+									      	},
+									      	error: function(resp) {
+									      		console.log(resp);
+									      	}
+										});
+									});
+									
 									$("#popup-activity").css("width",maxHeight);
 									$("#popup-activity").css("maxWidth",maxWidth);
 									$("#popup-activity").popup("open");
@@ -275,6 +311,9 @@ $(function(){
 						});
 						
 						td2.append(action);
+						if (action2) {
+							td2.append(action2);
+						}
 						tr.append(th);
 						tr.append(td1);
 						tr.append(td2);

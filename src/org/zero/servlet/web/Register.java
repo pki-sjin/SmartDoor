@@ -61,25 +61,29 @@ public class Register extends HttpServlet {
 				}
 			}
 		}
-
-		Timestamp create = validation.getCreateTime();
-		Timestamp now = new Timestamp(
-				System.currentTimeMillis() - 30 * 60 * 1000);
-		if (validation != null
-				&& validation.getCode().equalsIgnoreCase(sendCode)
-				&& validation.getCell().equalsIgnoreCase(username)
-				&& now.compareTo(create) < 0) {
-			// validation ok
-			SdUser user = new SdUser(username + "@" + ex_id, ex_id, username,
-					Util.encrypt(password), 1, new Timestamp(System
-							.currentTimeMillis()), new Timestamp(System
-							.currentTimeMillis()), 0, 1);
-			Transaction transaction = userDao.getSession().beginTransaction();
-			userDao.save(user);
-			transaction.commit();
-			request.getSession().setAttribute("USER", user);
-			json.put("status", 1);
-			json.put("data", "注册成功");
+		if (validation != null) {
+			Timestamp create = validation.getCreateTime();
+			Timestamp now = new Timestamp(
+					System.currentTimeMillis() - 30 * 60 * 1000);
+			if (validation.getCode().equalsIgnoreCase(sendCode)
+					&& validation.getCell().equalsIgnoreCase(username)
+					&& now.compareTo(create) < 0) {
+				// validation ok
+				SdUser user = new SdUser(username + "@" + ex_id, ex_id,
+						username, Util.encrypt(password), 1, new Timestamp(
+								System.currentTimeMillis()), new Timestamp(
+								System.currentTimeMillis()), 0, 1);
+				Transaction transaction = userDao.getSession()
+						.beginTransaction();
+				userDao.save(user);
+				transaction.commit();
+				request.getSession().setAttribute("USER", user);
+				json.put("status", 1);
+				json.put("data", "注册成功");
+			} else {
+				json.put("status", 0);
+				json.put("data", "验证码错误或已过期，请重新获取。");
+			}
 		} else {
 			json.put("status", 0);
 			json.put("data", "验证码错误或已过期，请重新获取。");

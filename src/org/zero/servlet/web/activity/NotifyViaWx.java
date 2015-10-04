@@ -1,30 +1,31 @@
 package org.zero.servlet.web.activity;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Notify extends HttpServlet {
+import com.wx.pay.business.ResultNotify;
+
+public class NotifyViaWx extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public Notify() {
+	public NotifyViaWx() {
 		super();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		//:TODO recieve from pay and update order.
-		out.flush();
-		out.close();
+		ResultNotify resultNotify = new ResultNotify(request, response);
+		try {
+			resultNotify.ProcessNotify();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
 }

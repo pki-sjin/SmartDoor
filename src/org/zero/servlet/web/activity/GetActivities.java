@@ -73,7 +73,7 @@ public class GetActivities extends HttpServlet {
 				// 展会结束
 				relation.setJoinId(6);
 			}
-			relation.setOrderId(0);
+			relation.setOrderId(0L);
 
 			Transaction transaction = relationDao.getSession()
 					.beginTransaction();

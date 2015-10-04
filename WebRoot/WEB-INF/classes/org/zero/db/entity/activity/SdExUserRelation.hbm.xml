@@ -19,7 +19,7 @@
         <property name="joinId" type="java.lang.Integer">
             <column name="join_id" not-null="true" />
         </property>
-        <property name="orderId" type="java.lang.Integer">
+        <property name="orderId" type="java.lang.Long">
             <column name="order_id" not-null="true" />
         </property>
     </class>

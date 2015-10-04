@@ -26,7 +26,7 @@ $(function(){
 						$("#username").attr("data-sms",resp.id);
 						$("#codeTag").html("短信识别码:" + resp.tag).show();
 					} else {
-						showErrorMessage(resp.data);	
+						showErrorMessage(resp.data);
 					}
 		      	},
 		      	error: function(resp) {

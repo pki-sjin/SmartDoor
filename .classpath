@@ -8,5 +8,23 @@
 	<classpathentry exported="true" kind="con" path="melibrary.com.genuitec.eclipse.hibernate.MYECLIPSE_HIBERNATE3_3_EXTRAS"/>
 	<classpathentry exported="true" kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-5.0.4-bin.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/zxing.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-httpclient-3.0.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jaxen-1.1-beta-6.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/app_interface_protocol-2.1.0.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-chain-1.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-io-2.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ihandy_msgqueue-1.0.0.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ihandy_util-1.0.0.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ihandy_util_chain-1.0.0.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/lxt2_client_api-2.2.0.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/lxt2_codec-2.0.0.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/lxt2_common_common-2.0.0.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mina-core-2.0.4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jackson-core-asl-1.9.13.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
