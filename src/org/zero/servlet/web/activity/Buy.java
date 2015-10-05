@@ -24,6 +24,7 @@ import org.zero.tool.EncodingHandler;
 
 import com.alipay.config.AlipayConfig;
 import com.alipay.util.AlipaySubmit;
+import com.wx.pay.business.JsApiPay;
 import com.wx.pay.business.NativePay;
 
 public class Buy extends HttpServlet {
@@ -52,11 +53,11 @@ public class Buy extends HttpServlet {
 		String order_id = request.getParameter("order_id");
 
 		SdUser user = (SdUser) request.getSession().getAttribute("USER");
-		if(user == null) {
+		if (user == null) {
 			response.sendRedirect("index.html");
 			return;
 		}
-		
+
 		SdTicketDAO dao = new SdTicketDAO();
 		SdTicket ticket = dao.findById(Integer.parseInt(ticket_id));
 
@@ -134,7 +135,7 @@ public class Buy extends HttpServlet {
 			out.println(sHtmlText);
 			out.flush();
 			out.close();
-		} else if ("wechat".equalsIgnoreCase(pay_method)) {
+		} else if ("wechatscan".equalsIgnoreCase(pay_method)) {
 			out.println("<!DOCTYPE html>");
 			out.println("<html>");
 			out.println("<head>");
@@ -190,6 +191,14 @@ public class Buy extends HttpServlet {
 			}
 			out.println("</body>");
 			out.println("</html>");
+			out.flush();
+			out.close();
+		} else if ("wechatjs".equalsIgnoreCase(pay_method)) {
+			JsApiPay jsApiPay = new JsApiPay(request, response);
+			try {
+				jsApiPay.GetOpenidAndAccessToken();
+			} catch (Exception e) {
+			}
 			out.flush();
 			out.close();
 		}

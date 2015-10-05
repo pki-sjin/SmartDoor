@@ -38,8 +38,12 @@ $(function(){
 							fieldSet.append(input).append(label);
 						}
 						
-						{
-							var input = $("<input type=\"radio\" name=\"radio-choice-pay\" id=\"radio-choice-pay-wechat\" value=\"wechat\">");
+						if (typeof WeixinJSBridge == "undefined") {
+							var input = $("<input type=\"radio\" name=\"radio-choice-pay\" id=\"radio-choice-pay-wechat\" value=\"wechatscan\">");
+							var label = $("<label for=\"radio-choice-pay-wechat\">微信支付</label>");
+							fieldSet.append(input).append(label);
+						} else {
+							var input = $("<input type=\"radio\" name=\"radio-choice-pay\" id=\"radio-choice-pay-wechat\" value=\"wechatjs\">");
 							var label = $("<label for=\"radio-choice-pay-wechat\">微信支付</label>");
 							fieldSet.append(input).append(label);
 						}

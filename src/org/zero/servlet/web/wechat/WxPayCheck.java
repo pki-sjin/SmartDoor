@@ -28,7 +28,7 @@ public class WxPayCheck extends HttpServlet {
 		String order_id = request.getParameter("order_id");
 		SdOrderDAO dao = new SdOrderDAO();
 		SdOrder order = dao.findById(Long.parseLong(order_id));
-		out.print(order.getState()+1);
+		out.print(order.getState());
 		out.flush();
 		out.close();
 	}

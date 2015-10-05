@@ -231,8 +231,8 @@ $(function(){
 							var maxHeight = $( window ).height() - 68;
 							if (maxHeight < 180) {
 								maxHeight = 180;
-							} else if (maxHeight > 300) {
-								maxHeight = 300;
+							} else if (maxHeight > 240) {
+								maxHeight = 240;
 							}
 							var maxWidth = $( window ).width() - 30;
 							if (maxHeight > maxWidth) {

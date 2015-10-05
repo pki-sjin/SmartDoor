@@ -3,6 +3,7 @@ package org.zero.servlet.web.sms;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,8 @@ import org.hibernate.Transaction;
 import org.json.JSONObject;
 import org.zero.db.entity.sms.SdValidation;
 import org.zero.db.entity.sms.SdValidationDAO;
+import org.zero.db.entity.user.SdUser;
+import org.zero.db.entity.user.SdUserDAO;
 
 import com.lxt2.protocol.common.Standard_SeqNum;
 import com.wxtl.smszd.SendSmsZD;
@@ -38,10 +41,23 @@ public class SendCode extends HttpServlet {
 		response.setContentType("text/json");
 		PrintWriter out = response.getWriter();
 		String cell = request.getParameter("cell");
-
+		String requireUserIsExist = request.getParameter("requireUserIsExist");
 		JSONObject json = new JSONObject();
 
 		if (cell != null && !cell.isEmpty()) {
+			if (!requireUserIsExist.equalsIgnoreCase("0")) {
+				// 需要确认用户存在才发送
+				SdUserDAO userDao = new SdUserDAO();
+				List<SdUser> users = userDao.findByName(cell);
+				if (users.isEmpty()) {
+					json.put("status", "0");
+					json.put("data", "用户不存在");
+					out.print(json);
+					out.flush();
+					out.close();
+					return;
+				}
+			}
 			SdValidationDAO dao = new SdValidationDAO();
 			SdValidation validation = generateValidation(cell);
 			String message = "您的验证码是" + validation.getCode() + ",本次识别码为("
@@ -50,7 +66,7 @@ public class SendCode extends HttpServlet {
 			// TODO: 调用发送短信模块
 			boolean result = SendSmsZD.sendSms(cell, message, 1,
 					Standard_SeqNum.computeSeqNoErr(2));
-			if (!result) {
+			if (result) {
 				Transaction transaction = dao.getSession().beginTransaction();
 				dao.save(validation);
 				transaction.commit();

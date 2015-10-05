@@ -23,6 +23,8 @@ public class WxPayConfig {
 	 * 支付结果通知回调url，用于商户接收支付结果
 	 */
 	public static String NOTIFY_URL = "";
+	
+	public static String OAUTH_REDIRECT_URL = "";
 
 	// =======【商户系统后台机器IP】=====================================
 	/*

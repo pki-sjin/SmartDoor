@@ -18,22 +18,18 @@ import org.zero.db.entity.user.SdUser;
 import org.zero.db.entity.user.SdUserDAO;
 import org.zero.tool.Util;
 
-public class Register extends HttpServlet {
-
-	private int ex_id;
+public class ResetPassword extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public Register() {
+	public ResetPassword() {
 		super();
 	}
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		ex_id = Integer.parseInt(getServletContext().getInitParameter(
-				"ActivedExhibitionId"));
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -44,7 +40,6 @@ public class Register extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String sendCode = request.getParameter("code");
-		int type = Integer.parseInt(request.getParameter("type"));
 		int sms_id = Integer.parseInt(request.getParameter("sms_id"));
 		JSONObject json = new JSONObject();
 
@@ -70,17 +65,21 @@ public class Register extends HttpServlet {
 					&& validation.getCell().equalsIgnoreCase(username)
 					&& now.compareTo(create) < 0) {
 				// validation ok
-				SdUser user = new SdUser(username + "@" + ex_id, ex_id,
-						username, Util.encrypt(password), type, new Timestamp(
-								System.currentTimeMillis()), new Timestamp(
-								System.currentTimeMillis()), 0, 1);
-				Transaction transaction = userDao.getSession()
-						.beginTransaction();
-				userDao.save(user);
-				transaction.commit();
-				request.getSession().setAttribute("USER", user);
-				json.put("status", 1);
-				json.put("data", "注册成功");
+				List<SdUser> users = userDao.findByName(username);
+				if (users.isEmpty()) {
+					json.put("status", 0);
+					json.put("data", "用户不存在");
+				} else {
+					SdUser user = users.get(0);
+					user.setPassword(Util.encrypt(password));
+					Transaction transaction = userDao.getSession()
+							.beginTransaction();
+					userDao.attachDirty(user);
+					transaction.commit();
+					request.getSession().setAttribute("USER", user);
+					json.put("status", 1);
+					json.put("data", "修改密码成功");
+				}
 			} else {
 				json.put("status", 0);
 				json.put("data", "验证码错误或已过期，请重新获取。");
@@ -93,4 +92,5 @@ public class Register extends HttpServlet {
 		out.flush();
 		out.close();
 	}
+
 }

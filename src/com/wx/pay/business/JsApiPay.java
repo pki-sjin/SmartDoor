@@ -1,7 +1,6 @@
 package com.wx.pay.business;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -67,7 +66,8 @@ public class JsApiPay {
 	 * 网页授权获取用户基本信息的全部过程 详情请参看网页授权获取用户基本信息：http://mp.weixin.qq.com/wiki/17/
 	 * c0f37d5704f0b64713d5d2c37b468d75.html 第一步：利用url跳转获取code
 	 * 第二步：利用code去获取openid和access_token
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 * 
 	 */
 	public void GetOpenidAndAccessToken() throws Exception {
@@ -78,8 +78,8 @@ public class JsApiPay {
 			GetOpenidAndAccessTokenFromCode(code);
 		} else {
 			// 构造网页授权获取code的URL
-			String host = request.getRequestURL().toString();
-			String redirect_uri = URLEncoder.encode("http://" + host, "UTF-8");
+			String redirect_uri = URLEncoder.encode(
+					WxPayConfig.OAUTH_REDIRECT_URL, "UTF-8");
 			WxPayData data = new WxPayData();
 			data.SetValue("appid", WxPayConfig.APPID);
 			data.SetValue("redirect_uri", redirect_uri);
@@ -89,8 +89,9 @@ public class JsApiPay {
 			String url = "https://open.weixin.qq.com/connect/oauth2/authorize?"
 					+ data.ToUrl();
 			Log.debug("Will Redirect to URL : " + url);
-			
-			response.sendRedirect(url); // Java 调用时此处不会像C#一样抛异常，JSP会继续执行，因此在此DEMO中需显示抛出异常中断JSP剩下的工作，实际实现中可以重构使OAth认证更加合理
+
+			response.sendRedirect(url); // Java
+										// 调用时此处不会像C#一样抛异常，JSP会继续执行，因此在此DEMO中需显示抛出异常中断JSP剩下的工作，实际实现中可以重构使OAth认证更加合理
 			throw new Exception("URL redirect");
 		}
 	}
@@ -155,14 +156,14 @@ public class JsApiPay {
 	 * @throws NoSuchAlgorithmException
 	 * @失败时抛异常WxPayException
 	 */
-	public WxPayData GetUnifiedOrderResult() throws WxPayException,
+	public WxPayData GetUnifiedOrderResult(long orderId, String body, String desc, String tag) throws WxPayException,
 			NoSuchAlgorithmException, ParserConfigurationException,
 			SAXException, IOException {
 		// 统一下单
 		WxPayData data = new WxPayData();
-		data.SetValue("body", "test");
-		data.SetValue("attach", "test");
-		data.SetValue("out_trade_no", WxPayApi.GenerateOutTradeNo());
+		data.SetValue("body", body);
+		data.SetValue("attach", desc);
+		data.SetValue("out_trade_no", orderId);
 		data.SetValue("total_fee", total_fee);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		Calendar c = Calendar.getInstance();
@@ -170,7 +171,7 @@ public class JsApiPay {
 		c.add(Calendar.MINUTE, 10);
 		data.SetValue("time_expire", dateFormat.format(c.getTime()));
 
-		data.SetValue("goods_tag", "test");
+		data.SetValue("goods_tag", tag);
 		data.SetValue("trade_type", "JSAPI");
 		data.SetValue("openid", openid);
 
@@ -212,8 +213,8 @@ public class JsApiPay {
 		jsApiParam.SetValue("appId", unifiedOrderResult.GetValue("appid"));
 		jsApiParam.SetValue("timeStamp", WxPayApi.GenerateTimeStamp());
 		jsApiParam.SetValue("nonceStr", WxPayApi.GenerateNonceStr());
-		jsApiParam.SetValue("package",
-				"prepay_id=" + unifiedOrderResult.GetValue("prepay_id"));
+		jsApiParam.SetValue("package", "prepay_id="
+				+ unifiedOrderResult.GetValue("prepay_id"));
 		jsApiParam.SetValue("signType", "MD5");
 		jsApiParam.SetValue("paySign", jsApiParam.MakeSign());
 

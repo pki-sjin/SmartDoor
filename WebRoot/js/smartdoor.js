@@ -1,5 +1,10 @@
 $(function() {
 //	$("#tabs").find("a")[1].click();
+	
+	$(".resetPassword").click(function(e){
+		window.location = "login/password.html";
+	});
+	
 	$("#guestSignUp").click(function(e){
 		window.location = "login/guestsignup.html";
 	});

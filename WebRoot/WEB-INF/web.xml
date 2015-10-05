@@ -101,6 +101,11 @@
     <servlet-name>WxPayCheck</servlet-name>
     <servlet-class>org.zero.servlet.web.wechat.WxPayCheck</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ResetPassword</servlet-name>
+    <servlet-class>org.zero.servlet.web.ResetPassword</servlet-class>
+  </servlet>
+
 
 
 
@@ -201,6 +206,10 @@
     <servlet-name>WxPayCheck</servlet-name>
     <url-pattern>/WxPayCheck</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ResetPassword</servlet-name>
+    <url-pattern>/ResetPassword</url-pattern>
+  </servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
@@ -282,6 +291,10 @@
 	<context-param>
 		<param-name>wx_notify_url</param-name>
 		<param-value>http://localhost:8080/SmartDoor/NotifyViaWx</param-value>
+	</context-param>
+	<context-param>
+		<param-name>wx_oauth_redirect_url</param-name>
+		<param-value>http://localhost:8080/SmartDoor/feature/WxJsPay.jsp</param-value>
 	</context-param>
 	<context-param>
 		<param-name>wx_ip</param-name>

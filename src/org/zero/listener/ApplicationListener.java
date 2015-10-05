@@ -31,6 +31,8 @@ public class ApplicationListener implements ServletContextListener {
 				.getInitParameter("wx_sslcert_password");
 		WxPayConfig.NOTIFY_URL = event.getServletContext().getInitParameter(
 				"wx_notify_url");
+		WxPayConfig.OAUTH_REDIRECT_URL = event.getServletContext()
+				.getInitParameter("wx_oauth_redirect_url");
 		WxPayConfig.IP = event.getServletContext().getInitParameter("wx_ip");
 		WxPayConfig.PROXY_URL = event.getServletContext().getInitParameter(
 				"wx_proxy_url");
