@@ -12,6 +12,8 @@ import org.json.JSONObject;
 import org.zero.db.entity.user.SdUser;
 import org.zero.tool.EncodingHandler;
 
+import sun.misc.BASE64Encoder;
+
 import com.google.zxing.WriterException;
 
 public class Join extends HttpServlet {
@@ -33,9 +35,10 @@ public class Join extends HttpServlet {
 		int size = Integer.parseInt(request.getParameter("size"));
 
 		SdUser user = (SdUser) request.getSession().getAttribute("USER");
-		String imgBase64 = "data:image/png;base64,";
+		String imgBase64 = "data:image/jpg;base64,";
 		try {
-			imgBase64 += EncodingHandler.createQRCode(user.getName(), size);
+			imgBase64 += new BASE64Encoder().encode(EncodingHandler
+					.createQRCode(user.getName(), size));
 		} catch (WriterException e) {
 			// give a error picture
 		}

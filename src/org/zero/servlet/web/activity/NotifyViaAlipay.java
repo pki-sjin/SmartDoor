@@ -30,7 +30,7 @@ public class NotifyViaAlipay extends HttpServlet {
 		super();
 	}
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
@@ -47,21 +47,25 @@ public class NotifyViaAlipay extends HttpServlet {
 						: valueStr + values[i] + ",";
 			}
 			// 乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
-			// valueStr = new String(valueStr.getBytes("ISO-8859-1"), "gbk");
+//			valueStr = new String(valueStr.getBytes("ISO-8859-1"), "UTF-8");
+			System.out.println(name + "=" + valueStr);
 			params.put(name, valueStr);
 		}
 
 		// 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以下仅供参考)//
 		// 商户订单号
 
-		String out_trade_no = new String(request.getParameter("out_trade_no"));
+		String out_trade_no = new String(request.getParameter("out_trade_no")
+				.getBytes("ISO-8859-1"), "UTF-8");
 
 		// 支付宝交易号
 
-		String trade_no = new String(request.getParameter("trade_no"));
+		String trade_no = new String(request.getParameter("trade_no").getBytes(
+				"ISO-8859-1"), "UTF-8");
 
 		// 交易状态
-		String trade_status = new String(request.getParameter("trade_status"));
+		String trade_status = new String(request.getParameter("trade_status")
+				.getBytes("ISO-8859-1"), "UTF-8");
 
 		// 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以上仅供参考)//
 

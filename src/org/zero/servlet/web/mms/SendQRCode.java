@@ -10,13 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.zero.db.entity.user.SdUser;
+import org.zero.tool.EncodingHandler;
 
-import sun.misc.BASE64Decoder;
-
+import com.google.zxing.WriterException;
 import com.lxt2.protocol.common.Standard_SeqNum;
 import com.wxtl.smszd.SendSmsZD;
 
 public class SendQRCode extends HttpServlet {
+
+	private int productID;
 
 	/**
 	 * Constructor of the object.
@@ -25,27 +27,37 @@ public class SendQRCode extends HttpServlet {
 		super();
 	}
 
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		productID = Integer.parseInt(getServletContext().getInitParameter(
+				"productID"));
+	}
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		response.setContentType("text/json");
 		PrintWriter out = response.getWriter();
-		String imgBase64 = request.getParameter("imgBase64");
 
 		JSONObject json = new JSONObject();
 
 		SdUser user = (SdUser) request.getSession().getAttribute("USER");
-		if (user != null && imgBase64 != null) {
-			String cell = user.getName();
-			String head = "data:image/png;base64,";
-			byte[] data = new BASE64Decoder().decodeBuffer(imgBase64
-					.substring(imgBase64.indexOf(head) + head.length()));
-			boolean result = SendSmsZD.sendMms(cell, data, 1, Standard_SeqNum
-					.computeSeqNoErr(1));
-			if (result) {
-				json.put("status", "1");
-				json.put("data", "发送成功");
-			} else {
+		if (user != null) {
+			try {
+				String cell = user.getName();
+				byte[] data = EncodingHandler.createQRCode(cell, 200);
+				boolean result = SendSmsZD.sendMms(cell, data, productID,
+						Standard_SeqNum.computeSeqNoErr(1));
+				if (result) {
+					json.put("status", "1");
+					json.put("data", "发送成功");
+				} else {
+					json.put("status", "0");
+					json.put("data", "发送失败，请联系客服");
+				}
+			} catch (WriterException e) {
+				e.printStackTrace();
 				json.put("status", "0");
 				json.put("data", "发送失败，请联系客服");
 			}

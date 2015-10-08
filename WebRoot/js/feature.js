@@ -286,7 +286,6 @@ $(function(){
 										
 										$.ajax({
 											url: "../SendQRCode",
-											data: "imgBase64=" + resp.qrcode,
 											type: "POST",
 											success: function(resp){
 												console.log(resp);

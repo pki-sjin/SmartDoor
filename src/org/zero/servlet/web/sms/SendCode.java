@@ -23,6 +23,8 @@ import com.wxtl.smszd.SendSmsZD;
 
 public class SendCode extends HttpServlet {
 
+	private int productID;
+
 	/**
 	 * Constructor of the object.
 	 */
@@ -33,6 +35,8 @@ public class SendCode extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
+		productID = Integer.parseInt(getServletContext().getInitParameter(
+				"productID"));
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -64,7 +68,7 @@ public class SendCode extends HttpServlet {
 					+ validation.getTag() + "),30分钟内有效。[国展中心]";
 			System.out.println(message);
 			// TODO: 调用发送短信模块
-			boolean result = SendSmsZD.sendSms(cell, message, 1,
+			boolean result = SendSmsZD.sendSms(cell, message, productID,
 					Standard_SeqNum.computeSeqNoErr(2));
 			if (result) {
 				Transaction transaction = dao.getSession().beginTransaction();

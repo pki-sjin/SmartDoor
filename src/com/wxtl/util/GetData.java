@@ -42,24 +42,6 @@ public class GetData {
 		// 短信签名，默认不起作用
 		smsSubmit.setSignString("");
 
-		/*
-		 * 以下的参数默认可以不需要
-		 */
-		// 过期时间戳(1970年1月1日0点0分0秒0毫秒为起点的时间值，精确到毫秒)(如不填写默认使用当前时间+1天作为过期时间戳)
-		// smsSubmit.setOverTime(System.currentTimeMillis());
-		// 定时发送时间戳(1970年1月1日0点0分0秒0毫秒为起点的时间值，精确到毫秒,定时时间不能晚于当前时间+1天)（如不填写默认为立即发送）
-		// smsSubmit.setSendTime(System.currentTimeMillis());
-		// 下行临时订购关系（默认填写 ""）
-		// smsSubmit.setLinkID("");
-		// 下发批次（默认填写 0）（保留字段，暂无意义）
-		// smsSubmit.setSendGroupID(120);
-		/*
-		 * 消息的下发类型 0 免费下发 1 按条下发 2 包月下发 3 订阅请求 4 取消请求 5 包月扣费 （保留字段，暂无意义）
-		 */
-		// smsSubmit.setMessageType((byte) 0);
-		// 设置批量发送时的手机号码，可不用设置，程序自动判断，但是必须小于规定数
-		// smsSubmit.setDestMobileCount((short) 1);
-		// System.out.println(smsSubmit);
 		return smsSubmit;
 
 	}
@@ -71,7 +53,10 @@ public class GetData {
 		// 添加图片类型文件
 		String picFileName = "qrcode.jpg";
 		mmsSubmit.addMessageContent(picFileName, data);
-		
+		// 添加文本类型文件
+		String txtFileName = "sign.txt";
+		mmsSubmit.addMessageContent(txtFileName, "[国展中心]".getBytes("UTF-8"));
+
 		mmsSubmit.setMessageFormat((byte) 30);
 		mmsSubmit.addDestMobile(mobile);
 		mmsSubmit.setCustomString("MMS");

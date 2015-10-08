@@ -47,7 +47,8 @@ public class ReturnViaAlipay extends HttpServlet {
 						: valueStr + values[i] + ",";
 			}
 			// 乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
-			valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+//			valueStr = new String(valueStr.getBytes("ISO-8859-1"), "UTF-8");
+			System.out.println(name + "=" + valueStr);
 			params.put(name, valueStr);
 		}
 

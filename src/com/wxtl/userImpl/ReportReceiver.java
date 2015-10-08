@@ -17,5 +17,4 @@ public class ReportReceiver implements IReceiver<CbipReport> {
 
 		System.out.println("已收到状态报告条数=" + (i++));
 	}
-
 }

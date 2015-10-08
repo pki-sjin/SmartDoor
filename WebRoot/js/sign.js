@@ -1,7 +1,7 @@
 $(function(){
 		$( "[data-role='header']" ).toolbar();
 		$("#sendCode").click(function(){
-			var requireUserIsExist = $("#requireUserIsExist")?$("#requireUserIsExist").val():0;
+			var requireUserIsExist = $("#requireUserIsExist").val()?$("#requireUserIsExist").val():0;
 			$("#sendCode").addClass("ui-state-disabled");
 			var button = $("#sendCode").contents()[0];
 			var time = 60;

@@ -7,8 +7,6 @@ import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 
-import sun.misc.BASE64Encoder;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -21,10 +19,10 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
  * 
  */
 public final class EncodingHandler {
-	public static String createQRCode(String str, int widthAndHeight)
+	public static byte[] createQRCode(String str, int widthAndHeight)
 			throws WriterException, IOException {
 		Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
-		hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+		hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
 		BitMatrix matrix = new MultiFormatWriter().encode(str,
 				BarcodeFormat.QR_CODE, widthAndHeight, widthAndHeight);
@@ -43,8 +41,8 @@ public final class EncodingHandler {
 		buffer.getRaster().setDataElements(0, 0, width, height, pixels);
 
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		ImageIO.write(buffer, "png", output);
+		ImageIO.write(buffer, "jpg", output);
 
-		return new BASE64Encoder().encode(output.toByteArray());
+		return output.toByteArray();
 	}
 }
