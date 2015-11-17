@@ -8,8 +8,10 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
+@WebFilter("/*")
 public class NoCacheFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import org.json.JSONObject;
 import org.zero.db.entity.user.SdUser;
 import org.zero.db.entity.user.SdUserDAO;
 
+@WebServlet("/EditUser")
 public class EditUser extends HttpServlet {
 
 	/**

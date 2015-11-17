@@ -5,7 +5,6 @@ import com.lxt2.protocol.cbip20.CbipDeliver;
 
 public class DeliverReceiver implements IReceiver<CbipDeliver> {
 
-	@Override
 	public void receive(CbipDeliver deliver) {
 		String content = null;
 		String mobile = null;

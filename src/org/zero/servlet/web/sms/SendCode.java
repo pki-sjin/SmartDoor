@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import org.zero.db.entity.user.SdUserDAO;
 import com.lxt2.protocol.common.Standard_SeqNum;
 import com.wxtl.smszd.SendSmsZD;
 
+@WebServlet("/SendCode")
 public class SendCode extends HttpServlet {
 
 	private int productID;
@@ -65,7 +67,7 @@ public class SendCode extends HttpServlet {
 			SdValidationDAO dao = new SdValidationDAO();
 			SdValidation validation = generateValidation(cell);
 			String message = "您的验证码是" + validation.getCode() + ",本次识别码为("
-					+ validation.getTag() + "),30分钟内有效。[国展中心]";
+					+ validation.getTag() + "),30分钟内有效。【国展中心】";
 			System.out.println(message);
 			// TODO: 调用发送短信模块
 			boolean result = SendSmsZD.sendSms(cell, message, productID,

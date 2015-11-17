@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.json.JSONObject;
 import org.zero.db.entity.exhibition.SdExhibition;
 import org.zero.db.entity.exhibition.SdExhibitionDAO;
 
+@WebServlet("/GetExhibition")
 public class GetExhibition extends HttpServlet {
 
 	private int ex_id;

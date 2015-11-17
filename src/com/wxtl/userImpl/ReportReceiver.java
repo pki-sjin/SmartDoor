@@ -6,7 +6,6 @@ import com.lxt2.protocol.cbip20.CbipReport;
 public class ReportReceiver implements IReceiver<CbipReport> {
 	int i = 1;
 
-	@Override
 	public void receive(CbipReport report) {
 
 		System.out.println("收到report-" + "流水号:" + report.getClientSeq()

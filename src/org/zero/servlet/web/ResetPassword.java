@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import org.zero.db.entity.user.SdUser;
 import org.zero.db.entity.user.SdUserDAO;
 import org.zero.tool.Util;
 
+@WebServlet("/ResetPassword")
 public class ResetPassword extends HttpServlet {
 
 	/**

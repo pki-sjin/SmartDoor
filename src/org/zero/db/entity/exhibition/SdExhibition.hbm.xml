@@ -20,10 +20,10 @@
             <column name="html" length="100" not-null="true" />
         </property>
         <property name="start" type="java.sql.Timestamp">
-            <column name="start" length="19" not-null="true" />
+            <column name="startTime" length="19" not-null="true" />
         </property>
         <property name="end" type="java.sql.Timestamp">
-            <column name="end" length="19" not-null="true" />
+            <column name="endTime" length="19" not-null="true" />
         </property>
         <property name="sysrecord" type="java.lang.Integer">
             <column name="sysrecord" not-null="true" />

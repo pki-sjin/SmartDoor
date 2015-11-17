@@ -6,7 +6,6 @@ import com.lxt2.protocol.IApiSubmitResp;
 
 public class RespReceiver implements IRespReceiver {
 
-	@Override
 	public void receive(IApiSubmit submit, IApiSubmitResp resp) {
 		// 可以不用转换类，呵呵
 		System.out.println("发送数据:" + "submit:" + submit);

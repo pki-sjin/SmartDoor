@@ -2,20 +2,20 @@ package org.zero.listener;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
 import com.alipay.config.AlipayConfig;
 import com.lxt2.javaapi.util.MsgConstant;
 import com.wx.pay.lib.WxPayConfig;
 import com.wxtl.userImpl.MessageClientEngine;
 
+@WebListener
 public class ApplicationListener implements ServletContextListener {
 
-	@Override
 	public void contextDestroyed(ServletContextEvent event) {
 
 	}
 
-	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		// 初始化微信
 		WxPayConfig.APPID = event.getServletContext().getInitParameter(
@@ -56,11 +56,9 @@ public class ApplicationListener implements ServletContextListener {
 		MsgConstant.loginName = event.getServletContext().getInitParameter(
 				"loginName"); // 用户名
 		MsgConstant.password = event.getServletContext().getInitParameter(
-				"password");
-		; // 密码
+				"password"); // 密码
 		MsgConstant.serverIp = event.getServletContext().getInitParameter(
-				"serverIp");
-		; // 服务器IP
+				"serverIp"); // 服务器IP
 		MsgConstant.serverPort = Integer.parseInt(event.getServletContext()
 				.getInitParameter("serverPort")); // 服务器端口
 
