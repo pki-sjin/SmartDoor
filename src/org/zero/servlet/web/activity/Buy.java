@@ -142,14 +142,11 @@ public class Buy extends HttpServlet {
 			out.println("<html>");
 			out.println("<head>");
 			out.println("<title>支付购买</title>");
-			out
-					.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
-			out
-					.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
+			out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
+			out.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
 			out.println("<link rel=\"stylesheet\" href=\"css/feature.css\">");
 			out.println("<script src=\"js/jquery-2.1.4.min.js\"></script>");
-			out
-					.println("<script src=\"js/jquery.mobile-1.4.5.min.js\"></script>");
+			out.println("<script src=\"js/jquery.mobile-1.4.5.min.js\"></script>");
 			out.println("<script>");
 			out.println("var interval = setInterval(function(){");
 			out.println("$.ajax({");
@@ -172,9 +169,9 @@ public class Buy extends HttpServlet {
 			out.println("<body>");
 			NativePay nativePay = new NativePay();
 			try {
-				String url = nativePay.GetPayUrl(order.getId() + "", ticket
-						.getId()
-						+ "", ticket.getName(), ticket.getDescription(),
+				String url = nativePay.GetPayUrl(order.getId() + "",
+						ticket.getId() + "", ticket.getName(),
+						ticket.getDescription(),
 						(int) (ticket.getPrice() * 100), ticket.getCode());
 
 				out.println("<div align=\"center\">");
@@ -196,10 +193,17 @@ public class Buy extends HttpServlet {
 			out.flush();
 			out.close();
 		} else if ("wechatjs".equalsIgnoreCase(pay_method)) {
-			JsApiPay jsApiPay = new JsApiPay(request, response);
-			try {
-				jsApiPay.GetOpenidAndAccessToken();
-			} catch (Exception e) {
+			String openid = (String) request.getSession()
+					.getAttribute("openid");
+
+			if (openid == null) {
+				// redirect to get openid
+				try {
+					JsApiPay.requestOpenId(request, response);
+				} catch (Exception e) {
+				}
+			} else {
+				response.sendRedirect("feature/WxJsPay.jsp");
 			}
 			out.flush();
 			out.close();

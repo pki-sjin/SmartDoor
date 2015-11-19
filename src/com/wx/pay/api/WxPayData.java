@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.TreeMap;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -155,7 +155,8 @@ public class WxPayData {
 				return m_values;
 			}
 			CheckSign();// 验证签名,不通过会抛异常
-		} catch (Exception ex) {
+		} catch (WxPayException | NoSuchAlgorithmException
+				| UnsupportedEncodingException ex) {
 			throw new WxPayException(ex.getMessage());
 		}
 
@@ -228,7 +229,7 @@ public class WxPayData {
 	 * @throws NoSuchAlgorithmException
 	 * @throws UnsupportedEncodingException
 	 */
-	public String MakeSign() throws WxPayException, NoSuchAlgorithmException,
+	public String MakeSign(String type) throws WxPayException, NoSuchAlgorithmException,
 			UnsupportedEncodingException {
 		// 转url格式
 		String str = ToUrl();
@@ -275,7 +276,7 @@ public class WxPayData {
 		String return_sign = GetValue("sign").toString();
 
 		// 在本地计算新的签名
-		String cal_sign = MakeSign();
+		String cal_sign = MakeSign("MD5");
 
 		if (cal_sign.equalsIgnoreCase(return_sign)) {
 			return true;

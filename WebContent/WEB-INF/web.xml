@@ -80,10 +80,6 @@
     <param-value>http://www.resss.com/SmartDoor/NotifyViaWx</param-value>
   </context-param>
   <context-param>
-    <param-name>wx_oauth_redirect_url</param-name>
-    <param-value>http://www.resss.com/SmartDoor/feature/WxJsPay.jsp</param-value>
-  </context-param>
-  <context-param>
     <param-name>wx_ip</param-name>
     <param-value>8.8.8.8</param-value>
   </context-param>
