@@ -25,6 +25,7 @@ import org.zero.tool.EncodingHandler;
 
 import com.alipay.config.AlipayConfig;
 import com.alipay.util.AlipaySubmit;
+import com.sun.org.apache.xml.internal.security.utils.Base64;
 import com.wx.pay.business.JsApiPay;
 import com.wx.pay.business.NativePay;
 
@@ -176,7 +177,8 @@ public class Buy extends HttpServlet {
 
 				out.println("<div align=\"center\">");
 				out.println("<img src=\"data:image/png;base64,"
-						+ EncodingHandler.createQRCode(url, 300) + "\"/>");
+						+ Base64.encode(EncodingHandler.createQRCode(url, 300))
+						+ "\"/>");
 				out.println("</div>");
 				out.println("<div align=\"center\">");
 				out.println("请用微信扫一扫以上二维码进行支付。");

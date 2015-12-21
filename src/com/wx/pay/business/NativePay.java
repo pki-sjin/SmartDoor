@@ -1,10 +1,7 @@
 package com.wx.pay.business;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -17,39 +14,11 @@ import org.xml.sax.SAXException;
 
 import com.wx.pay.api.WxPayApi;
 import com.wx.pay.api.WxPayData;
-import com.wx.pay.lib.WxPayConfig;
 import com.wx.pay.lib.WxPayException;
 
 public class NativePay {
 
 	private static Logger Log = Logger.getLogger(NativePay.class);
-
-	/**
-	 * 生成扫描支付模式一URL
-	 * 
-	 * @param productId
-	 *            商品ID
-	 * @return 模式一URL
-	 * @throws WxPayException
-	 * @throws UnsupportedEncodingException
-	 * @throws NoSuchAlgorithmException
-	 */
-	public String GetPrePayUrl(String productId)
-			throws NoSuchAlgorithmException, UnsupportedEncodingException,
-			WxPayException {
-		WxPayData data = new WxPayData();
-		data.SetValue("appid", WxPayConfig.APPID);// 公众帐号id
-		data.SetValue("mch_id", WxPayConfig.MCHID);// 商户号
-		data.SetValue("time_stamp", WxPayApi.GenerateTimeStamp());// 时间戳
-		data.SetValue("nonce_str", WxPayApi.GenerateNonceStr());// 随机字符串
-		data.SetValue("product_id", productId);// 商品ID
-		data.SetValue("sign", data.MakeSign("MD5"));// 签名
-		String str = ToUrlParams(data.GetValues());// 转换为URL串
-		String url = "weixin://wxpay/bizpayurl?" + str;
-
-		Log.info("Get native pay mode 1 url : " + url);
-		return url;
-	}
 
 	/**
 	 * 生成直接支付url，支付url有效期为2小时,模式二
@@ -63,7 +32,8 @@ public class NativePay {
 	 * @throws WxPayException
 	 * @throws NoSuchAlgorithmException
 	 */
-	public String GetPayUrl(String orderId, String productId, String body, String desc, int fee, String tag) throws NoSuchAlgorithmException,
+	public String GetPayUrl(String orderId, String productId, String body,
+			String desc, int fee, String tag) throws NoSuchAlgorithmException,
 			WxPayException, ParserConfigurationException, SAXException,
 			IOException {
 		Log.info("Native pay mode 2 url is producing...");
@@ -71,13 +41,14 @@ public class NativePay {
 		WxPayData data = new WxPayData();
 		data.SetValue("body", body);// 商品描述
 		data.SetValue("attach", desc);// 附加数据
-		data.SetValue("out_trade_no", orderId);// 随机字符串
+		data.SetValue("out_trade_no", "zzlm_ticket_" + orderId);// 随机字符串
 		data.SetValue("total_fee", fee);// 总金额
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-//		Calendar c = Calendar.getInstance();
-//		data.SetValue("time_start", dateFormat.format(c.getTime()));// 交易起始时间
-//		c.add(Calendar.MINUTE, 10);
-//		data.SetValue("time_expire", dateFormat.format(c.getTime()));// 交易结束时间
+		// SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		// Calendar c = Calendar.getInstance();
+		// data.SetValue("time_start", dateFormat.format(c.getTime()));// 交易起始时间
+		// c.add(Calendar.MINUTE, 10);
+		// data.SetValue("time_expire", dateFormat.format(c.getTime()));//
+		// 交易结束时间
 
 		data.SetValue("goods_tag", tag);// 商品标记
 		data.SetValue("trade_type", "NATIVE");// 交易类型

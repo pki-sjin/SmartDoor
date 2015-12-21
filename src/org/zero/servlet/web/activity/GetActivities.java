@@ -18,6 +18,7 @@ import org.zero.db.entity.activity.SdExUserRelationDAO;
 import org.zero.db.entity.exhibition.SdExhibition;
 import org.zero.db.entity.exhibition.SdExhibitionDAO;
 import org.zero.db.entity.user.SdUser;
+import org.zero.db.session.HibernateSessionFactory;
 
 @WebServlet("/GetActivities")
 public class GetActivities extends HttpServlet {
@@ -48,6 +49,7 @@ public class GetActivities extends HttpServlet {
 		SdUser user = (SdUser) request.getSession().getAttribute("USER");
 		SdExhibitionDAO exDao = new SdExhibitionDAO();
 		SdExUserRelationDAO relationDao = new SdExUserRelationDAO();
+		HibernateSessionFactory.getSession().clear();
 		SdExhibition ex = exDao.findById(ex_id);
 		JSONArray array = new JSONArray();
 		long now = System.currentTimeMillis();

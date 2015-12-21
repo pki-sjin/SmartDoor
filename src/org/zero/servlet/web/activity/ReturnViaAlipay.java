@@ -19,6 +19,7 @@ import org.zero.db.entity.activity.SdExUserRelation;
 import org.zero.db.entity.activity.SdExUserRelationDAO;
 import org.zero.db.entity.order.SdOrder;
 import org.zero.db.entity.order.SdOrderDAO;
+import org.zero.db.session.HibernateSessionFactory;
 
 import com.alipay.util.AlipayNotify;
 
@@ -84,29 +85,29 @@ public class ReturnViaAlipay extends HttpServlet {
 				// 判断该笔订单是否在商户网站中已经做过处理
 				// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 				// 如果有做过处理，不执行商户的业务程序
+				HibernateSessionFactory.getSession().clear();
 				SdOrderDAO dao = new SdOrderDAO();
 				SdOrder order = dao.findById(Long.parseLong(out_trade_no));
-				if (order.getState() == 0) {
-					Transaction transaction = dao.getSession()
-							.beginTransaction();
-					order.setState(1);
-					order.setRemark("支付宝订单交易完成前端通知，交易号：" + trade_no);
-					order.setFinish(new Timestamp(System.currentTimeMillis()));
-					dao.attachDirty(order);
-					transaction.commit();
-				}
-			}
-			SdExUserRelationDAO relationDao = new SdExUserRelationDAO();
-			List<SdExUserRelation> relations = relationDao.findByOrderId(Long
-					.parseLong(out_trade_no));
-
-			if (!relations.isEmpty()) {
-				SdExUserRelation relation = relations.get(0);
-				relation.setJoinId(3);
-				Transaction relationTransaction = relationDao.getSession()
+				Transaction transaction = dao.getSession()
 						.beginTransaction();
-				relationDao.attachDirty(relation);
-				relationTransaction.commit();
+				order.setState(1);
+				order.setRemark("支付宝订单交易完成前端通知，交易号：" + trade_no);
+				order.setFinish(new Timestamp(System.currentTimeMillis()));
+				dao.attachDirty(order);
+				transaction.commit();
+				
+				SdExUserRelationDAO relationDao = new SdExUserRelationDAO();
+				List<SdExUserRelation> relations = relationDao.findByOrderId(Long
+						.parseLong(out_trade_no));
+
+				if (!relations.isEmpty()) {
+					SdExUserRelation relation = relations.get(0);
+					relation.setJoinId(3);
+					Transaction relationTransaction = relationDao.getSession()
+							.beginTransaction();
+					relationDao.attachDirty(relation);
+					relationTransaction.commit();
+				}
 			}
 
 			// 该页面可做页面美工编辑

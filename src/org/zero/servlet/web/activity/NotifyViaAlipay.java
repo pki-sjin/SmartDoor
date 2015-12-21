@@ -19,6 +19,7 @@ import org.zero.db.entity.activity.SdExUserRelation;
 import org.zero.db.entity.activity.SdExUserRelationDAO;
 import org.zero.db.entity.order.SdOrder;
 import org.zero.db.entity.order.SdOrderDAO;
+import org.zero.db.session.HibernateSessionFactory;
 
 import com.alipay.util.AlipayNotify;
 
@@ -45,11 +46,12 @@ public class NotifyViaAlipay extends HttpServlet {
 			String[] values = (String[]) requestParams.get(name);
 			String valueStr = "";
 			for (int i = 0; i < values.length; i++) {
-				valueStr = (i == values.length - 1) ? valueStr + values[i]
+				valueStr = (i == values.length - 1)
+						? valueStr + values[i]
 						: valueStr + values[i] + ",";
 			}
 			// 乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
-//			valueStr = new String(valueStr.getBytes("ISO-8859-1"), "UTF-8");
+			// valueStr = new String(valueStr.getBytes("ISO-8859-1"), "UTF-8");
 			System.out.println(name + "=" + valueStr);
 			params.put(name, valueStr);
 		}
@@ -76,12 +78,9 @@ public class NotifyViaAlipay extends HttpServlet {
 			// 请在这里加上商户的业务逻辑程序代码
 
 			// ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-
+			HibernateSessionFactory.getSession().clear();
 			SdOrderDAO dao = new SdOrderDAO();
 			SdOrder order = dao.findById(Long.parseLong(out_trade_no));
-			SdExUserRelationDAO relationDao = new SdExUserRelationDAO();
-			List<SdExUserRelation> relations = relationDao.findByOrderId(Long
-					.parseLong(out_trade_no));
 			Transaction transaction = dao.getSession().beginTransaction();
 			if (trade_status.equals("TRADE_FINISHED")) {
 				// 判断该笔订单是否在商户网站中已经做过处理
@@ -103,6 +102,13 @@ public class NotifyViaAlipay extends HttpServlet {
 				// 付款完成后，支付宝系统发送该交易状态通知
 			}
 
+			dao.attachDirty(order);
+			transaction.commit();
+
+			SdExUserRelationDAO relationDao = new SdExUserRelationDAO();
+			List<SdExUserRelation> relations = relationDao.findByOrderId(Long
+					.parseLong(out_trade_no));
+
 			if (!relations.isEmpty()) {
 				SdExUserRelation relation = relations.get(0);
 				relation.setJoinId(3);
@@ -111,9 +117,6 @@ public class NotifyViaAlipay extends HttpServlet {
 				relationDao.attachDirty(relation);
 				relationTransaction.commit();
 			}
-
-			dao.attachDirty(order);
-			transaction.commit();
 
 			// ——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 

@@ -4,7 +4,7 @@
 %>
 <%
 	WxPayData wxJsApiParam = null;
-	String openid = request.getParameter("openid");
+	String openid = (String)session.getAttribute("openid");
 	SdUser user = (SdUser) session.getAttribute("USER");
 	if (user == null) {
 		response.sendRedirect("index.html");

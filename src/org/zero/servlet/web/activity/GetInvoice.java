@@ -18,6 +18,7 @@ import org.zero.db.entity.order.SdOrderDAO;
 import org.zero.db.entity.ticket.SdTicket;
 import org.zero.db.entity.ticket.SdTicketDAO;
 import org.zero.db.entity.user.SdUser;
+import org.zero.db.session.HibernateSessionFactory;
 
 @WebServlet("/GetInvoice")
 public class GetInvoice extends HttpServlet {
@@ -49,6 +50,7 @@ public class GetInvoice extends HttpServlet {
 			json.put("status", -1);
 		} else {
 			SdExUserRelationDAO relationDao = new SdExUserRelationDAO();
+			HibernateSessionFactory.getSession().clear();
 			List<SdExUserRelation> relations = relationDao.findByUserId(user
 					.getId());
 			if (!relations.isEmpty()) {
@@ -69,7 +71,9 @@ public class GetInvoice extends HttpServlet {
 					json.put("method", order.getMethod());
 					json.put("create", order.getCreateTime());
 					json.put("finish", order.getFinish());
-					json.put("state", order.getState() == 1?"支付成功":"支付失败");
+					json.put("state", order.getState().intValue() == 1
+							? "支付成功"
+							: "支付失败");
 				} else {
 					json.put("status", 0);
 					json.put("data", "没有找到订单");

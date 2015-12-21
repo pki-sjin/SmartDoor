@@ -38,7 +38,7 @@ $(function(){
 							fieldSet.append(input).append(label);
 						}
 						
-						if (typeof WeixinJSBridge == "undefined") {
+						if (!is_weixn()) {
 							var input = $("<input type=\"radio\" name=\"radio-choice-pay\" id=\"radio-choice-pay-wechat\" value=\"wechatscan\">");
 							var label = $("<label for=\"radio-choice-pay-wechat\">微信支付</label>");
 							fieldSet.append(input).append(label);
@@ -55,25 +55,27 @@ $(function(){
 						var order_id = $("<input type=\"hidden\" name=\"order_id\" id=\"order_id\">");	
 						$(".payDiv").append(order_id);
 						button.click(function(e) {
-							var header = '<div data-role="header"><h2>提示</h2></div>',
-							            content = '<div align="center"><div id="pay-success" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">已经成功付款<input type="button" data-enhanced="true" value="已经成功付款"></div></div><div align="center"><div id="pay-failed" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">付款遇到问题<input type="button" data-enhanced="true" value="付款遇到问题"></div></div>',
-							            popup = '<div data-role="popup" id="popup-pay" data-corners="false" data-tolerance="15" data-dismissible="false"></div>';
-							        // Create the popup.
-							        $( header )
-							            .appendTo( $( popup )
-							                .appendTo( $.mobile.activePage )
-							                .popup() )
-							            .toolbar().after( content );
-							$("#popup-pay").css("width",300);
-							$("#popup-pay").popup("open");
-							
-							$("#pay-success").click(function(e){
-								window.location = "invoice.html";
-							});
-							
-							$("#pay-failed").click(function(e){
-								$("#popup-pay").popup("close");
-							});
+							if (!is_weixn()) {
+								var header = '<div data-role="header"><h2>提示</h2></div>',
+								            content = '<div align="center"><div id="pay-success" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">已经成功付款<input type="button" data-enhanced="true" value="已经成功付款"></div></div><div align="center"><div id="pay-failed" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">付款遇到问题<input type="button" data-enhanced="true" value="付款遇到问题"></div></div>',
+								            popup = '<div data-role="popup" id="popup-pay" data-corners="false" data-tolerance="15" data-dismissible="false"></div>';
+								        // Create the popup.
+								        $( header )
+								            .appendTo( $( popup )
+								                .appendTo( $.mobile.activePage )
+								                .popup() )
+								            .toolbar().after( content );
+								$("#popup-pay").css("width",300);
+								$("#popup-pay").popup("open");
+								
+								$("#pay-success").click(function(e){
+									window.location = "invoice.html";
+								});
+								
+								$("#pay-failed").click(function(e){
+									$("#popup-pay").popup("close");
+								});
+							}
 							
 							var order_id_value = new Date().getTime();
 							order_id.val(order_id_value);
@@ -102,4 +104,14 @@ function showErrorMessage(message) {
 		  transition: "slidedown",
 		  positionTo: "window"
 	});
+}
+
+function is_weixn(){
+    var s = navigator.userAgent.toLowerCase();  
+    var a = s.match(/micromessenger\/(\d+\.\d+\.\d+)/) || s.match(/micromessenger\/(\d+\.\d+)/);
+    if (a != null) {
+    	return true;
+    } else {
+    	return false;
+    }
 }

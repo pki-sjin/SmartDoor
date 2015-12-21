@@ -30,4 +30,15 @@ public class NotifyViaWx extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		ResultNotify resultNotify = new ResultNotify(request, response);
+		try {
+			resultNotify.ProcessNotify();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

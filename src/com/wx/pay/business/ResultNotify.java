@@ -17,6 +17,7 @@ import org.zero.db.entity.activity.SdExUserRelation;
 import org.zero.db.entity.activity.SdExUserRelationDAO;
 import org.zero.db.entity.order.SdOrder;
 import org.zero.db.entity.order.SdOrderDAO;
+import org.zero.db.session.HibernateSessionFactory;
 
 import com.wx.pay.api.WxPayApi;
 import com.wx.pay.api.WxPayData;
@@ -57,7 +58,8 @@ public class ResultNotify extends Notify {
 		String transaction_id = notifyData.GetValue("transaction_id")
 				.toString();
 
-		String out_trade_no = notifyData.GetValue("out_trade_no").toString();;
+		String out_trade_no = notifyData.GetValue("out_trade_no").toString()
+				.replaceAll("zzlm_ticket_", "");
 
 		// 查询订单，判断订单真实性
 		if (!QueryOrder(transaction_id)) {
@@ -73,6 +75,28 @@ public class ResultNotify extends Notify {
 		}
 		// 查询订单成功
 		else {
+			HibernateSessionFactory.getSession().clear();
+			SdOrderDAO dao = new SdOrderDAO();
+			SdOrder order = dao.findById(Long.parseLong(out_trade_no));
+			Transaction transaction = dao.getSession().beginTransaction();
+			order.setState(1);
+			order.setRemark("微信订单交易完成前端通知，交易号：" + transaction_id);
+			order.setFinish(new Timestamp(System.currentTimeMillis()));
+			dao.attachDirty(order);
+			transaction.commit();
+			
+			SdExUserRelationDAO relationDao = new SdExUserRelationDAO();
+			List<SdExUserRelation> relations = relationDao.findByOrderId(Long
+					.parseLong(out_trade_no));
+			if (!relations.isEmpty()) {
+				SdExUserRelation relation = relations.get(0);
+				relation.setJoinId(3);
+				Transaction relationTransaction = relationDao.getSession()
+						.beginTransaction();
+				relationDao.attachDirty(relation);
+				relationTransaction.commit();
+			}
+
 			WxPayData res = new WxPayData();
 			res.SetValue("return_code", "SUCCESS");
 			res.SetValue("return_msg", "OK");
@@ -81,30 +105,6 @@ public class ResultNotify extends Notify {
 			print.write(res.ToXml());
 			print.flush();
 			print.close();
-
-			SdOrderDAO dao = new SdOrderDAO();
-			SdOrder order = dao.findById(Long.parseLong(out_trade_no));
-			if (order.getState() == 0) {
-				Transaction transaction = dao.getSession().beginTransaction();
-				order.setState(1);
-				order.setRemark("微信订单交易完成前端通知，交易号：" + transaction_id);
-				order.setFinish(new Timestamp(System.currentTimeMillis()));
-				dao.attachDirty(order);
-				transaction.commit();
-			}
-		}
-
-		SdExUserRelationDAO relationDao = new SdExUserRelationDAO();
-		List<SdExUserRelation> relations = relationDao.findByOrderId(Long
-				.parseLong(out_trade_no));
-
-		if (!relations.isEmpty()) {
-			SdExUserRelation relation = relations.get(0);
-			relation.setJoinId(3);
-			Transaction relationTransaction = relationDao.getSession()
-					.beginTransaction();
-			relationDao.attachDirty(relation);
-			relationTransaction.commit();
 		}
 	}
 

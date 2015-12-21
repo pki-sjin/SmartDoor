@@ -246,7 +246,7 @@ $(function(){
 									console.log(resp);
 									var closebtn = '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>',
 									            header = '<div data-role="header"><h2>活动详情</h2></div>',
-									            content = '<div id="qrcodeImg" align="center"></div><div id="qrcodeSend" align="center"><div id="sendQRCode" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">发送二维码到手机<input type="button" data-enhanced="true" value="发送二维码到手机"></div></div><div id="qrcodeTips" align="center"></div><div id="purchaseDiv" align="center"><div id="onlinePurchase" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">在线购票<input type="button" data-enhanced="true" value="在线购票"></div></div>',
+									            content = '<div id="qrcodeImg" align="center"></div><div id="qrcodeSend" align="center"><div id="sendQRCode" style="display:none;" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">发送二维码到手机<input type="button" data-enhanced="true" value="发送二维码到手机"></div></div><div id="qrcodeTips" align="center"></div><div id="purchaseDiv" align="center"><div id="onlinePurchase" class="ui-input-btn ui-btn ui-btn-inline ui-corner-all">在线购票<input type="button" data-enhanced="true" value="在线购票"></div></div>',
 									            popup = '<div data-role="popup" id="popup-activity" data-corners="false" data-tolerance="15"></div>';
 									        // Create the popup.
 									        $( header )
@@ -298,6 +298,7 @@ $(function(){
 									});
 									
 									$("#popup-activity").css("width",maxHeight);
+									$("#popup-activity").css("minHeight",370);
 									$("#popup-activity").css("maxWidth",maxWidth);
 									$("#popup-activity").popup("open");
 									

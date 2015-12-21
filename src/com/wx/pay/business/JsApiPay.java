@@ -118,15 +118,14 @@ public class JsApiPay {
 	 * @失败时抛异常WxPayException
 	 */
 	public static WxPayData GetUnifiedOrderResult(String openid,
-			String orderId, String body, String desc,
-			int fee, String tag) throws WxPayException,
-			NoSuchAlgorithmException, ParserConfigurationException,
-			SAXException, IOException {
+			String orderId, String body, String desc, int fee, String tag)
+			throws WxPayException, NoSuchAlgorithmException,
+			ParserConfigurationException, SAXException, IOException {
 		// 统一下单
 		WxPayData data = new WxPayData();
 		data.SetValue("body", body);
 		data.SetValue("attach", desc);
-		data.SetValue("out_trade_no", orderId);
+		data.SetValue("out_trade_no", "zzlm_ticket_" + orderId);
 		data.SetValue("total_fee", fee);
 		// SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		// Calendar c = Calendar.getInstance();
